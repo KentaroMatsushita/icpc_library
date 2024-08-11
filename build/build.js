@@ -1,10 +1,12 @@
 const title = "ICPC Notebook";  // タイトル (先頭に表示)
-const teamname = "tatyam/ICPC_notebook";   // チーム名 + 大学名 (各ページ左上に表示)
+const teamname = "Speed Star (The University of Tokyo)";   // チーム名 + 大学名 (各ページ左上に表示)
 const fontsize = "7.4pt";       // フォントサイズ
 const orientation = "portrait";     // portrait (縦長) / landscape (横長)
 const num_columns = 2;          // 何段組みか
 const break_after_toc = "column"; // toc の後に : page (改ページする) / column (改段する) / auto (強制しない)
-const section_order = ["template", "data-structure", "math", "modint", "FPS", "graph", "graph/tree", "flow", "string", "algorithm", "geometry", "memo"];   // src/* のフォルダを読み出す順序
+const section_order = ["template", //
+    "data-structure", "dp", "math","graph", //
+     "modint", "FPS", "tree", "flow", "string","geometry", "memo"];   // src/* のフォルダを読み出す順序
 
 
 
