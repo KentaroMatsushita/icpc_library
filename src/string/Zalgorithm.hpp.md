@@ -12,20 +12,20 @@ data:
   attributes:
     links: []
   bundledCode: "#line 1 \"src/string/Zalgorithm.hpp\"\n// Z[i] := LCP(s, s[i:])\n\
-    // abacaba -> 7010301\nauto Z(string s) {\n   ll n = sz(s), l = -1, r = -1;\n\
-    \   vector<ll> z(n, n);\n   rep(i, 1, n) {\n      ll& x = z[i] = i < r ? min(r\
-    \ - i, z[i - l]) : 0;\n      while(i + x < n && s[i + x] == s[x]) x++;\n     \
-    \ if(i + x > r) l = i, r = i + x;\n   }\n   return z;\n}\n"
-  code: "// Z[i] := LCP(s, s[i:])\n// abacaba -> 7010301\nauto Z(string s) {\n   ll\
-    \ n = sz(s), l = -1, r = -1;\n   vector<ll> z(n, n);\n   rep(i, 1, n) {\n    \
-    \  ll& x = z[i] = i < r ? min(r - i, z[i - l]) : 0;\n      while(i + x < n &&\
-    \ s[i + x] == s[x]) x++;\n      if(i + x > r) l = i, r = i + x;\n   }\n   return\
-    \ z;\n}\n"
+    // abacaba -> 7010301\nauto Z(string s) {\n    ll n = sz(s), l = -1, r = -1;\n\
+    \    vector<ll> z(n, n);\n    rep(i, 1, n) {\n        ll &x = z[i] = i < r ? min(r\
+    \ - i, z[i - l]) : 0;\n        while(i + x < n && s[i + x] == s[x]) x++;\n   \
+    \     if(i + x > r) l = i, r = i + x;\n    }\n    return z;\n}\n"
+  code: "// Z[i] := LCP(s, s[i:])\n// abacaba -> 7010301\nauto Z(string s) {\n   \
+    \ ll n = sz(s), l = -1, r = -1;\n    vector<ll> z(n, n);\n    rep(i, 1, n) {\n\
+    \        ll &x = z[i] = i < r ? min(r - i, z[i - l]) : 0;\n        while(i + x\
+    \ < n && s[i + x] == s[x]) x++;\n        if(i + x > r) l = i, r = i + x;\n   \
+    \ }\n    return z;\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/string/Zalgorithm.hpp
   requiredBy: []
-  timestamp: '2024-05-31 19:00:40+09:00'
+  timestamp: '2024-08-12 04:22:28+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/string/Zalgorithm.test.cpp

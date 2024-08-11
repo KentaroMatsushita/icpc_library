@@ -1,49 +1,35 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/math/BinaryGCD.hpp
-    title: Binary GCD
-  - icon: ':heavy_check_mark:'
-    path: test/template.hpp
-    title: test/template.hpp
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
-  attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
-    links:
-    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
-  bundledCode: "#line 1 \"test/math/BinaryGCD.test.cpp\"\n#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
-    \n#line 1 \"test/template.hpp\"\n#include <bits/stdc++.h>\nusing namespace std;\n\
-    using ll = long long;\nconst ll INF = LLONG_MAX / 4;\n#define rep(i, a, b) for(ll\
-    \ i = a; i < (b); i++)\n#define all(a) begin(a), end(a)\n#define sz(a) ssize(a)\n\
-    bool chmin(auto& a, auto b) { return a > b ? a = b, 1 : 0; }\nbool chmax(auto&\
-    \ a, auto b) { return a < b ? a = b, 1 : 0; }\n#line 3 \"test/math/BinaryGCD.test.cpp\"\
-    \nusing u64 = uint64_t;\n#line 1 \"src/math/BinaryGCD.hpp\"\nu64 ctz(u64 x) {\
-    \ return countr_zero(x); }\nu64 binary_gcd(u64 x, u64 y) {\n   if(!x || !y) return\
-    \ x | y;\n   u64 n = ctz(x), m = ctz(y);\n   x >>= n, y >>= m;\n   while(x !=\
-    \ y) {\n      if(x > y) x = (x - y) >> ctz(x - y);\n      else y = (y - x) >>\
-    \ ctz(y - x);\n   }\n   return x << min(n, m);\n}\n#line 5 \"test/math/BinaryGCD.test.cpp\"\
-    \n\nint main() {\n   mt19937_64 rnd;\n   rep(shift, 0, 64) {\n      rep(i, 0,\
-    \ (ll)1e5) {\n         u64 a = rnd() >> shift, b = rnd() >> shift;\n         assert(gcd(a,\
-    \ b) == binary_gcd(a, b));\n      }\n   }\n   puts(\"Hello World\");\n}\n"
+  _verificationStatusIcon: ':x:'
+  attributes: {}
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+    , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
+    \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
+    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/cplusplus.py\"\
+    , line 187, in bundle\n    bundler.update(path)\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
+    , line 401, in update\n    self.update(self._resolve(pathlib.Path(included), included_from=path))\n\
+    \                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n \
+    \ File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
+    , line 260, in _resolve\n    raise BundleErrorAt(path, -1, \"no such header\"\
+    )\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: src/math/BinaryGCD.hpp:\
+    \ line -1: no such header\n"
   code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
     \n#include \"test/template.hpp\"\nusing u64 = uint64_t;\n#include \"src/math/BinaryGCD.hpp\"\
     \n\nint main() {\n   mt19937_64 rnd;\n   rep(shift, 0, 64) {\n      rep(i, 0,\
     \ (ll)1e5) {\n         u64 a = rnd() >> shift, b = rnd() >> shift;\n         assert(gcd(a,\
     \ b) == binary_gcd(a, b));\n      }\n   }\n   puts(\"Hello World\");\n}\n"
-  dependsOn:
-  - test/template.hpp
-  - src/math/BinaryGCD.hpp
+  dependsOn: []
   isVerificationFile: true
   path: test/math/BinaryGCD.test.cpp
   requiredBy: []
-  timestamp: '2024-06-01 01:21:46+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/math/BinaryGCD.test.cpp
 layout: document

@@ -13,18 +13,20 @@ data:
     links: []
   bundledCode: "#line 1 \"src/math/ExtGCD.hpp\"\n// returns gcd(a, b) and assign x,\
     \ y to integers\n// s.t. ax + by = gcd(a, b) and |x| + |y| is minimized\nll extgcd(ll\
-    \ a, ll b, ll& x, ll& y) {\n   // assert(a >= 0 && b >= 0);\n   if(!b) return\
-    \ x = 1, y = 0, a;\n   ll d = extgcd(b, a % b, y, x);\n   y -= a / b * x;\n  \
-    \ return d;\n}\n"
+    \ a, ll b, ll &x, ll &y) {\n    // assert(a >= 0 && b >= 0);\n    if(!b) return\
+    \ x = 1, y = 0, a;\n    ll d = extgcd(b, a % b, y, x);\n    y -= a / b * x;\n\
+    \    return d;\n}\nll inv_mod(ll x, ll md) {\n    ll y, z;\n    extgcd(x, md,\
+    \ y, z);\n    return (y % md + md) % md;\n}\n"
   code: "// returns gcd(a, b) and assign x, y to integers\n// s.t. ax + by = gcd(a,\
-    \ b) and |x| + |y| is minimized\nll extgcd(ll a, ll b, ll& x, ll& y) {\n   //\
-    \ assert(a >= 0 && b >= 0);\n   if(!b) return x = 1, y = 0, a;\n   ll d = extgcd(b,\
-    \ a % b, y, x);\n   y -= a / b * x;\n   return d;\n}\n"
+    \ b) and |x| + |y| is minimized\nll extgcd(ll a, ll b, ll &x, ll &y) {\n    //\
+    \ assert(a >= 0 && b >= 0);\n    if(!b) return x = 1, y = 0, a;\n    ll d = extgcd(b,\
+    \ a % b, y, x);\n    y -= a / b * x;\n    return d;\n}\nll inv_mod(ll x, ll md)\
+    \ {\n    ll y, z;\n    extgcd(x, md, y, z);\n    return (y % md + md) % md;\n}"
   dependsOn: []
   isVerificationFile: false
   path: src/math/ExtGCD.hpp
   requiredBy: []
-  timestamp: '2024-06-01 02:08:16+09:00'
+  timestamp: '2024-08-12 04:22:28+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/math/ExtGCD.test.cpp

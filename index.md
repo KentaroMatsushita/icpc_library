@@ -3,42 +3,131 @@ data:
   libraryCategories:
   - name: src/FPS
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/FPS/FFT.hpp
       title: "FFT (\u9AD8\u901F\u30D5\u30FC\u30EA\u30A8\u5909\u63DB / \u7573\u307F\
         \u8FBC\u307F)"
-    - icon: ':heavy_check_mark:'
-      path: src/FPS/FFT_fast.hpp
-      title: FFT (bit reversal ver.)
+    - icon: ':warning:'
+      path: src/FPS/bm.hpp
+      title: src/FPS/bm.hpp
+    - icon: ':warning:'
+      path: src/FPS/poly.cpp
+      title: src/FPS/poly.cpp
   - name: src/data-structure
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
+      path: src/data-structure/2d-segtree.hpp
+      title: src/data-structure/2d-segtree.hpp
+    - icon: ':x:'
       path: src/data-structure/BIT.hpp
       title: BIT (Fenwick Tree)
     - icon: ':heavy_check_mark:'
       path: src/data-structure/FastSet.hpp
       title: "\u9AD8\u901F bitset (64 \u5206\u6728)"
-  - name: src/extra
+    - icon: ':warning:'
+      path: src/data-structure/hash_map.hpp
+      title: src/data-structure/hash_map.hpp
+    - icon: ':warning:'
+      path: src/data-structure/lazy-segtree.hpp
+      title: src/data-structure/lazy-segtree.hpp
+    - icon: ':warning:'
+      path: src/data-structure/li-chao.hpp
+      title: src/data-structure/li-chao.hpp
+    - icon: ':warning:'
+      path: src/data-structure/line_container.hpp
+      title: src/data-structure/line_container.hpp
+    - icon: ':warning:'
+      path: src/data-structure/link-cut.hpp
+      title: src/data-structure/link-cut.hpp
+    - icon: ':warning:'
+      path: src/data-structure/pbds.hpp
+      title: src/data-structure/pbds.hpp
+    - icon: ':warning:'
+      path: src/data-structure/rbst.hpp
+      title: src/data-structure/rbst.hpp
+    - icon: ':warning:'
+      path: src/data-structure/segbeats.hpp
+      title: src/data-structure/segbeats.hpp
+    - icon: ':warning:'
+      path: src/data-structure/segtree.hpp
+      title: src/data-structure/segtree.hpp
+    - icon: ':warning:'
+      path: src/data-structure/swag.hpp
+      title: src/data-structure/swag.hpp
+    - icon: ':warning:'
+      path: src/data-structure/wavelet_matrix.hpp
+      title: src/data-structure/wavelet_matrix.hpp
+  - name: src/dp
     pages:
-    - icon: ':heavy_check_mark:'
-      path: src/extra/modint_fast.hpp
-      title: "32 bit \u3067\u52A0\u6E1B\u7B97\u3092\u3061\u3083\u3093\u3068\u66F8\u3044\
-        \u305F Modint"
+    - icon: ':warning:'
+      path: src/dp/d-edge-monge.hpp
+      title: src/dp/d-edge-monge.hpp
+    - icon: ':warning:'
+      path: src/dp/mo-rollback.hpp
+      title: src/dp/mo-rollback.hpp
+    - icon: ':warning:'
+      path: src/dp/mo.hpp
+      title: src/dp/mo.hpp
+  - name: src/flow
+    pages:
+    - icon: ':warning:'
+      path: src/flow/flow.hpp
+      title: src/flow/flow.hpp
+    - icon: ':warning:'
+      path: src/flow/mcf.hpp
+      title: src/flow/mcf.hpp
+  - name: src/geometry
+    pages:
+    - icon: ':warning:'
+      path: src/geometry/argument-sort.hpp
+      title: src/geometry/argument-sort.hpp
+    - icon: ':warning:'
+      path: src/geometry/circle.hpp
+      title: src/geometry/circle.hpp
+    - icon: ':warning:'
+      path: src/geometry/line.hpp
+      title: src/geometry/line.hpp
+  - name: src/graph
+    pages:
+    - icon: ':warning:'
+      path: src/graph/bcc.hpp
+      title: src/graph/bcc.hpp
+    - icon: ':warning:'
+      path: src/graph/lowlink.hpp
+      title: src/graph/lowlink.hpp
+    - icon: ':warning:'
+      path: src/graph/scc.hpp
+      title: src/graph/scc.hpp
+    - icon: ':warning:'
+      path: src/graph/tecc.hpp
+      title: src/graph/tecc.hpp
   - name: src/math
     pages:
-    - icon: ':heavy_check_mark:'
-      path: src/math/BinaryGCD.hpp
-      title: Binary GCD
     - icon: ':heavy_check_mark:'
       path: src/math/ExtGCD.hpp
       title: "\u62E1\u5F35\u30E6\u30FC\u30AF\u30EA\u30C3\u30C9\u306E\u4E92\u9664\u6CD5\
         \ (Extended Euclidean algorithm)"
+    - icon: ':warning:'
+      path: src/math/crt.hpp
+      title: src/math/crt.hpp
+    - icon: ':warning:'
+      path: src/math/factorize.cpp
+      title: src/math/factorize.cpp
+    - icon: ':warning:'
+      path: src/math/floor_sum.hpp
+      title: src/math/floor_sum.hpp
+    - icon: ':warning:'
+      path: src/math/fzt-fwt.hpp
+      title: src/math/fzt-fwt.hpp
+    - icon: ':warning:'
+      path: src/math/lagrange-hokan.hpp
+      title: src/math/lagrange-hokan.hpp
   - name: src/modint
     pages:
     - icon: ':heavy_check_mark:'
       path: src/modint/BarrettReduction.hpp
       title: Barrett Reduction
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/modint/modint.hpp
       title: Modint
   - name: src/string
@@ -63,23 +152,28 @@ data:
     - icon: ':warning:'
       path: src/template/template.hpp
       title: src/template/template.hpp
+  - name: src/tree
+    pages:
+    - icon: ':warning:'
+      path: src/tree/hld.hpp
+      title: src/tree/hld.hpp
   - name: test
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: test/template.hpp
       title: test/template.hpp
   verificationCategories:
   - name: test/FPS
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/FPS/FFT.test.cpp
       title: test/FPS/FFT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/FPS/FFT_fast.test.cpp
       title: test/FPS/FFT_fast.test.cpp
   - name: test/data-structure
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/data-structure/BIT.test.cpp
       title: test/data-structure/BIT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -87,7 +181,7 @@ data:
       title: test/data-structure/FastSet.test.cpp
   - name: test/math
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/math/BinaryGCD.test.cpp
       title: test/math/BinaryGCD.test.cpp
     - icon: ':heavy_check_mark:'

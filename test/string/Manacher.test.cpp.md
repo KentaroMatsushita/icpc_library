@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/string/Manacher.hpp
     title: Manacher's algorithm
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: test/template.hpp
     title: test/template.hpp
   _extendedRequiredBy: []
@@ -27,11 +27,11 @@ data:
     \n// aaabaaa -> 1214121\n// \u5076\u6570\u9577\u306E\u56DE\u6587\u3092\u542B\u3081\
     \u3066\u76F4\u5F84\u3092\u77E5\u308B\u306B\u306F\uFF0CN+1 \u500B\u306E $ \u3092\
     \u633F\u5165\u3057\u3066 1 \u3092\u5F15\u304F\n// $a$a$a$b$a$a$a$ -> 123432181234321\n\
-    auto manacher(string s) {\n   ll n = sz(s), i = 0, j = 0;\n   vector<ll> r(n);\n\
-    \   while(i < n) {\n      while(i >= j && i + j < n && s[i - j] == s[i + j]) j++;\n\
-    \      r[i] = j;\n      ll k = 1;\n      while(i >= k && i + k < n && k + r[i\
-    \ - k] < j) {\n         r[i + k] = r[i - k];\n         k++;\n      }\n      i\
-    \ += k, j -= k;\n   }\n   return r;\n}\n#line 4 \"test/string/Manacher.test.cpp\"\
+    auto manacher(string s) {\n    ll n = sz(s), i = 0, j = 0;\n    vector<ll> r(n);\n\
+    \    while(i < n) {\n        while(i >= j && i + j < n && s[i - j] == s[i + j])\
+    \ j++;\n        r[i] = j;\n        ll k = 1;\n        while(i >= k && i + k <\
+    \ n && k + r[i - k] < j) {\n            r[i + k] = r[i - k];\n            k++;\n\
+    \        }\n        i += k, j -= k;\n    }\n    return r;\n}\n#line 4 \"test/string/Manacher.test.cpp\"\
     \n\nint main() {\n   cin.tie(0)->sync_with_stdio(0);\n   string S;\n   cin >>\
     \ S;\n   const ll N = sz(S);\n   string T(N * 2 + 1, '$');\n   rep(i, 0, N) T[i\
     \ * 2 + 1] = S[i];\n   auto r = manacher(T);\n   rep(i, 1, N * 2) {\n      if(i\
@@ -50,7 +50,7 @@ data:
   isVerificationFile: true
   path: test/string/Manacher.test.cpp
   requiredBy: []
-  timestamp: '2024-05-31 19:00:40+09:00'
+  timestamp: '2024-08-12 04:22:28+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/string/Manacher.test.cpp

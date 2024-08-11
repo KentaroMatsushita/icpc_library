@@ -3,21 +3,15 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/FPS/FFT.test.cpp
     title: test/FPS/FFT.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/FPS/FFT_fast.test.cpp
-    title: test/FPS/FFT_fast.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/data-structure/BIT.test.cpp
     title: test/data-structure/BIT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/data-structure/FastSet.test.cpp
     title: test/data-structure/FastSet.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/math/BinaryGCD.test.cpp
-    title: test/math/BinaryGCD.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/math/ExtGCD.test.cpp
     title: test/math/ExtGCD.test.cpp
@@ -48,9 +42,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/template.test.cpp
     title: test/template.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: '#line 1 "test/template.hpp"
@@ -98,7 +92,7 @@ data:
   path: test/template.hpp
   requiredBy: []
   timestamp: '2024-05-31 19:00:40+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/modint/BarrettReduction.test.cpp
   - test/modint/modint.test.cpp
@@ -108,12 +102,10 @@ data:
   - test/string/RollingHash.test.cpp
   - test/string/Manacher.test.cpp
   - test/string/SuffixArray.test.cpp
-  - test/math/BinaryGCD.test.cpp
   - test/math/ExtGCD.test.cpp
   - test/data-structure/BIT.test.cpp
   - test/data-structure/FastSet.test.cpp
   - test/template.test.cpp
-  - test/FPS/FFT_fast.test.cpp
   - test/FPS/FFT.test.cpp
 documentation_of: test/template.hpp
 layout: document
