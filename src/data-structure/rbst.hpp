@@ -1,54 +1,63 @@
-inline int xorshift() {
-    static int w = 1234567890;
-    w = w ^ (w << 17);
-    w = w ^ (w >> 13);
-    w = w ^ (w << 5);
-    return w;
-}
-struct Node {
-    Node *l, *r;
-    int v, s;
-} buf[200010];
-// Not Verified
-int bufUsed;
-Node *NewNode(int v) {
-    Node *ptr = buf + (bufUsed++);
-    ptr->l = NULL;
-    ptr->r = NULL;
-    ptr->s = 1;
-    ptr->v = v;
-    return ptr;
-}
-Node *Merge(Node *a, Node *b) {
-    if(!a) return b;
-    if(!b) return a;
-    int s = a->s + b->s, x = xorshift() % s;
-    if(x < a->s) {
-        a->r = Merge(a->r, b);
-        a->s = s;
-        return a;
-    } else {
-        b->l = Merge(a, b->l);
-        b->s = s;
-        return b;
+
+template <typename T, T (*f)(T, T), T (*e)()> struct RBST {
+    inline int rnd() {
+        static int x = 123456789;
+        static int y = 362436069;
+        static int z = 521288629;
+        static int w = 88675123;
+        int t;
+
+        t = x ^ (x << 11);
+        x = y;
+        y = z;
+        z = w;
+        return w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));
     }
-}
-using pn = pair<Node *, Node *>;
-pn Split(Node *x, int t) {
-    if(!x) return pn(0, 0);
-    if(t <= x->v) {
-        pn c = Split(x->l, t);
-        if(c.first) x->s -= c.first->s;
-        x->l = c.second;
-        return pn(c.first, x);
-    } else {
-        pn c = Split(x->r, t);
-        if(c.second) x->s -= c.second->s;
-        x->r = c.first;
-        return pn(x, c.second);
+    struct node {
+        node *l, *r;
+        int cnt;
+        T x, sum;
+        node() = default;
+        node(T x) : x(x), sum(x), l(0), r(0) { cnt = 1; }
+    };
+    RBST(int n) : pool(n) {}
+    int cnt(const node *t) { return t ? t->cnt : 0; }
+    T sum(const node *t) { return t ? t->sum : e(); }
+    node *update(node *t) {
+        t->cnt = cnt(t->l) + cnt(t->r) + 1;
+        t->sum = f(f(sum(t->l), t->x), sum(t->r));
+        return t;
     }
-}
-int MaxValue(Node *x) {
-    while(x->r) x = x->r;
-    return x->v;
-}
+    vector<node> pool;
+    int ptr = 0;
+    inline node *alloc(const T &v) {
+        if(si(pool) == ptr) pool.resize(si(pool) * 2);
+        return &(pool[ptr++] = node(v));
+    }
+    node *merge(node *l, node *r) {
+        if(!l or !r) return l ? l : r;
+        if(rnd() % (cnt(l) + cnt(r)) < cnt(l)) {
+            l->r = merge(l->r, r);
+            return update(l);
+        }
+        r->l = merge(l, r->l);
+        return update(r);
+    }
+
+    pair<node *, node *> split(node *t, int k) {
+        if(!t) return {t, t};
+        if(k <= cnt(t->l)) {
+            auto [l, r] = split(t->l, k);
+            t->l = r;
+            return {l, update(t)};
+        }
+        auto [l, r] = split(t->r, k - cnt(t->l) - 1);
+        t->r = l;
+        return {update(t), r};
+    }
+
+    void insert(node *&t, int k, const T &v) {
+        auto [l, r] = split(t, k);
+        t = merge(merge(l, alloc(v)), r);
+    }
+};

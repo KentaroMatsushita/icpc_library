@@ -1,43 +1,43 @@
+
 struct MoRollBack {
     using ADD = function<void(int)>;
     using REM = function<void(int)>;
     using RESET = function<void()>;
-    using SNAPSHOT = function<void()>;
+    using SNAP = function<void()>;
     using ROLLBACK = function<void()>;
-    int width;
-    vector<int> left, right, order;
-    MoRollBack(int N, int Q) : width((int)sqrt(N)), order(Q) { iota(begin(order), end(order), 0); }
-    void add(int l, int r) { /* [l, r) */
-        left.emplace_back(l);
-        right.emplace_back(r);
+    int w;
+    vector<int> l, r, ord;
+    MoRollBack(int n, int q) : w((int)sqrt(n)), ord(q) { iota(all(ord), 0); }
+    void add(int a, int b) { /* [l, r) */
+        l.emplace_back(a);
+        r.emplace_back(b);
     }
-    int run(const ADD &add, const REM &rem, const RESET &reset, const SNAPSHOT &snapshot, const ROLLBACK &rollback) {
-        assert(left.size() == order.size());
-        sort(begin(order), end(order), [&](int a, int b) {
-            int ablock = left[a] / width, bblock = left[b] / width;
-            if(ablock != bblock) return ablock < bblock;
-            return right[a] < right[b];
+    void run(const ADD &add, const REM &rem, const RESET &reset, const SNAP &snap, const ROLLBACK &rollback) {
+        sort(begin(ord), end(ord), [&](int a, int b) {
+            int ab = l[a] / w, bb = l[b] / w;
+            if(ab != bb) return ab < bb;
+            return r[a] < r[b];
         });
         reset();
-        for(auto idx : order) {
-            if(right[idx] - left[idx] < width) {
-                for(int i = left[idx]; i < right[idx]; i++) add(i);
+        for(auto idx : ord) {
+            if(r[idx] - l[idx] < w) {
+                rep(i, l[idx], r[idx]) add(i);
                 rem(idx);
                 rollback();
             }
         }
-        int nr = 0, last_block = -1;
-        for(auto idx : order) {
-            if(right[idx] - left[idx] < width) continue;
-            int block = left[idx] / width;
-            if(last_block != block) {
+        int nr = 0, lb = -1;
+        for(auto idx : ord) {
+            if(r[idx] - l[idx] < w) continue;
+            int b = l[idx] / w;
+            if(lb != b) {
                 reset();
-                last_block = block;
-                nr = (block + 1) * width;
+                lb = b;
+                nr = (b + 1) * w;
             }
-            while(nr < right[idx]) add(nr++);
-            snapshot();
-            for(int j = (block + 1) * width - 1; j >= left[idx]; j--) add(j);
+            while(nr < r[idx]) add(nr++);
+            snap();
+            per(j, (b + 1) * w, l[idx]) add(j);
             rem(idx);
             rollback();
         }

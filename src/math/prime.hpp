@@ -27,11 +27,13 @@ bool is_prime(ll n) {
     return true;
 }
 ll pollard_single(ll n) {
-    auto f = [&](ll x) { return (i128(x) * x + 1) % n; };
+    ll R;
+    auto f = [&](ll x) { return (i128(x) * x + R) % n; };
     if(is_prime(n)) return n;
     if(n % 2 == 0) return 2;
     ll st = 0;
     while(true) {
+        R = rnd(1, n);
         st++;
         ll x = st, y = f(x);
         while(true) {
@@ -43,28 +45,10 @@ ll pollard_single(ll n) {
         }
     }
 }
-vl pollard(ll n) {
+vl factor(ll n) {
     if(n == 1) return {};
     ll x = pollard_single(n);
     if(x == n) return {x};
-    vl le = pollard(x);
-    vl ri = pollard(n / x);
-    le.insert(le.end(), ri.begin(), ri.end());
-    return le;
-}
-ll primitive_root(ll p) {
-    auto v = pollard(p - 1);
-    while(true) {
-        ll g = rand_int(1, p - 1);
-        //[1, p-1]
-        bool ok = true;
-        for(auto d : v) {
-            ll f = (p - 1) / d;
-            if(pow_mod<i128>(g, f, p) == 1) {
-                ok = false;
-                break;
-            }
-        }
-        if(ok) return g;
-    }
+    vl l = factor(x), r = factor(n / x);
+    return l.insert(end(l), all(r)), l;
 }

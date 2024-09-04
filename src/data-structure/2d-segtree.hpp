@@ -1,107 +1,61 @@
-template <typename T> struct segment_tree_2d {
-    vector<pair<int, int>> pos;
-    vector<int> X;
-    vector<vector<int>> Y;
-    int N;
-    vector<int> N2;
-    vector<vector<T>> ST;
-    function<T(T, T)> f;
-    T E;
-    segment_tree_2d(function<T(T, T)> f, T E) : f(f), E(E) {}
-    void add(int x, int y) {
-        pos.push_back(make_pair(x, y));
-        X.push_back(x);
-    }
+// DS ... data_structure_type
+// S ... size_type
+// T ... value_type
+template <typename DS, typename T> struct RangeTree {
+    using NEW = function<DS *(int)>;
+    using ADD = function<void(DS &, int, T)>;
+    using SUM = function<T(DS &, int, int)>;
+    using MRG = function<T(T, T)>;
+
+    int n, m;
+    NEW nw;
+    ADD ad;
+    SUM sm;
+    MRG mg;
+    T ti;
+    vector<DS *> ds;
+    vector<vi> ys;
+    vector<pii> ps;
+
+    RangeTree(NEW nw, ADD ad, SUM sm, MRG mg, T ti) : nw(nw), ad(ad), sm(sm), mg(mg), ti(ti) {}
+
+    void add_point(int x, int y) { ps.eb(x, y); }
+
     void build() {
-        int cnt = pos.size();
-        sort(X.begin(), X.end());
-        X.erase(unique(X.begin(), X.end()), X.end());
-        int cnt2 = X.size();
-        N = 1;
-        while(N < cnt2) { N *= 2; }
-        Y = vector<vector<int>>(N * 2 - 1);
-        for(int i = 0; i < cnt; i++) {
-            int p = lower_bound(X.begin(), X.end(), pos[i].first) - X.begin();
-            p += N - 1;
-            Y[p].push_back(pos[i].second);
-            while(p > 0) {
-                p = (p - 1) / 2;
-                Y[p].push_back(pos[i].second);
-            }
+        sort(all(ps));
+        ps.erase(unique(all(ps)), end(ps));
+        n = si(ps);
+        ds.resize(2 * n, nullptr);
+        ys.resize(2 * n);
+        rep(i, n) {
+            ys[i + n].eb(ps[i].second);
+            ds[i + n] = nw(1);
         }
-        N2 = vector<int>(N * 2 - 1, 0);
-        ST = vector<vector<T>>(N * 2 - 1);
-        for(int i = 0; i < N * 2 - 1; i++) {
-            if(!Y[i].empty()) {
-                sort(Y[i].begin(), Y[i].end());
-                Y[i].erase(unique(Y[i].begin(), Y[i].end()), Y[i].end());
-                int cnt3 = Y[i].size();
-                N2[i] = 1;
-                while(N2[i] < cnt3) { N2[i] *= 2; }
-                ST[i] = vector<T>(N2[i] * 2 - 1);
-            }
+        per(i, n, 1) {
+            ys[i].resize(si(ys[i << 1]) + si(ys[(i << 1) | 1]));
+            merge(all(ys[i << 1]), all(ys[(i << 1) | 1]), begin(ys[i]));
+            ys[i].erase(unique(all(ys[i])), end(ys[i]));
+            ds[i] = nw(si(ys[i]));
         }
     }
-    T get(int x, int y) {
-        int p1 = lower_bound(X.begin(), X.end(), x) - X.begin();
-        p1 += N - 1;
-        int p2 = lower_bound(Y[p1].begin(), Y[p1].end(), y) - Y[p1].begin();
-        p2 += N2[p1] - 1;
-        return ST[p1][p2];
+
+    int id(int x) const { return lower_bound(all(ps), pii(x, 0)) - begin(ps); }
+
+    int id(int i, int y) const { return lower_bound(all(ys[i]), y) - begin(ys[i]); }
+
+    void add(int x, int y, T a) {
+        int i = lower_bound(all(ps), pii(x, y)) - begin(ps);
+        assert(ps[i] == make_pair(x, y));
+        for(i += n; i; i >>= 1) ad(*ds[i], id(i, y), a);
     }
-    void update2(int i, int j, T x) {
-        j += N2[i] - 1;
-        ST[i][j] = x;
-        while(j > 0) {
-            j = (j - 1) / 2;
-            ST[i][j] = f(ST[i][j * 2 + 1], ST[i][j * 2 + 2]);
+
+    T sum(int xl, int yl, int xr, int yr) {
+        T L = ti, R = ti;
+        int a = id(xl), b = id(xr);
+        for(a += n, b += n; a < b; a >>= 1, b >>= 1) {
+            if(a & 1) L = mg(L, sm(*ds[a], id(a, yl), id(a, yr))), ++a;
+            if(b & 1) --b, R = mg(sm(*ds[b], id(b, yl), id(b, yr)), R);
         }
-    }
-    void update(int i, int j, T x) {
-        int p1 = lower_bound(X.begin(), X.end(), i) - X.begin();
-        p1 += N - 1;
-        int p2 = lower_bound(Y[p1].begin(), Y[p1].end(), j) - Y[p1].begin();
-        update2(p1, p2, x);
-        while(p1 > 0) {
-            p1 = (p1 - 1) / 2;
-            p2 = lower_bound(Y[p1].begin(), Y[p1].end(), j) - Y[p1].begin();
-            T x2 = 0;
-            int pl = lower_bound(Y[p1 * 2 + 1].begin(), Y[p1 * 2 + 1].end(), j) - Y[p1 * 2 + 1].begin();
-            if(pl < Y[p1 * 2 + 1].size()) {
-                if(Y[p1 * 2 + 1][pl] == j) { x2 += ST[p1 * 2 + 1][N2[p1 * 2 + 1] - 1 + pl]; }
-            }
-            int pr = lower_bound(Y[p1 * 2 + 2].begin(), Y[p1 * 2 + 2].end(), j) - Y[p1 * 2 + 2].begin();
-            if(pr < Y[p1 * 2 + 2].size()) {
-                if(Y[p1 * 2 + 2][pr] == j) { x2 += ST[p1 * 2 + 2][N2[p1 * 2 + 2] - 1 + pr]; }
-            }
-            update2(p1, p2, x2);
-        }
-    }
-    T query1(int id, int L, int R, int i, int l, int r) {
-        if(r <= L || R <= l) {
-            return E;
-        } else if(L <= l && r <= R) {
-            return ST[id][i];
-        } else {
-            int m = (l + r) / 2;
-            return f(query1(id, L, R, i * 2 + 1, l, m), query1(id, L, R, i * 2 + 2, m, r));
-        }
-    }
-    T query2(int U, int D, int L, int R, int i, int u, int d) {
-        if(d <= U || D <= u) {
-            return E;
-        } else if(U <= u && d <= D) {
-            int l = lower_bound(Y[i].begin(), Y[i].end(), L) - Y[i].begin();
-            int r = lower_bound(Y[i].begin(), Y[i].end(), R) - Y[i].begin();
-            return query1(i, l, r, 0, 0, N2[i]);
-        } else {
-            int m = (u + d) / 2;
-            return f(query2(U, D, L, R, i * 2 + 1, u, m), query2(U, D, L, R, i * 2 + 2, m, d));
-        }
-    }
-    T query(int U, int D, int L, int R) {
-        int u = lower_bound(X.begin(), X.end(), U) - X.begin();
-        int d = lower_bound(X.begin(), X.end(), D) - X.begin();
-        return query2(u, d, L, R, 0, 0, N);
+        return mg(L, R);
     }
 };

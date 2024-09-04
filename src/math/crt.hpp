@@ -2,7 +2,7 @@
 pll crt(const vl &b, const vl &c) {
     int n = si(b);
     ll r = 0, m = 1;
-    for(int i = 0; i < n; i++) {
+    rep(i, n) {
         ll g, im, x;
         g = extgcd(m, c[i], im, x);
         if((b[i] - r) % g) return {0, -1};

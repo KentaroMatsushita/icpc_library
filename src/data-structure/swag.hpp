@@ -1,47 +1,35 @@
-template <class T, class Op> class SWAG {
+template <typename T, typename F> struct SWAG {
+    using vp = vector<pair<T, T>>;
+    vp a, b;
+    F f;
+    T I;
+    SWAG(F f, T i) : f(f), I(i) {}
+
   private:
-    class node {
-      public:
-        T val, sum;
-        node(const T &val, const T &sum) : val(val), sum(sum) {}
-    };
-    Op op;
-    stack<node> front_stack, back_stack;
+    T get(vp &v) { return empty(v) ? I : v.back().second; }
+    void pusha(T x) { a.eb(x, f(x, get(a))); }
+    void pushb(T x) { b.eb(x, f(get(b), x)); } // reversed!!
+    void rebalance() {
+        int n = si(a) + si(b);
+        int s0 = n / 2 + (empty(a) ? n & 1 : 0);
+        vp v{a};
+        reverse(all(v));
+        copy(all(b), back_inserter(v));
+        a.clear(), b.clear();
+        per(i, s0, 0) pusha(v[i].first);
+        rep(i, s0, n) pushb(v[i].first);
+    }
 
   public:
-    SWAG(const Op &op = Op()) : op(op), front_stack(), back_stack() {}
-    bool empty() const { return front_stack.empty() && back_stack.empty(); }
-    size_t size() const { return front_stack.size() + back_stack.size(); }
-    T fold_all() const {
-        assert(!empty());
-        if(front_stack.empty()) {
-            return back_stack.top().sum;
-        } else if(back_stack.empty()) {
-            return front_stack.top().sum;
-        } else {
-            return op(front_stack.top().sum, back_stack.top().sum);
-        }
+    T front() { return (a.empty() ? b.front() : a.back()).first; }
+    T back() { return (b.empty() ? a.front() : b.back()).first; }
+    void pop_front() {
+        if(empty(a)) rebalance();
+        a.pop_back();
     }
-    void push(const T &x) {
-        if(back_stack.empty()) {
-            back_stack.emplace(x, x);
-        } else {
-            T s{op(back_stack.top().sum, x)};
-            back_stack.emplace(x, s);
-        }
+    void pop_back() {
+        if(empty(b)) rebalance();
+        b.pop_back();
     }
-    void pop() {
-        assert(!empty());
-        if(front_stack.empty()) {
-            front_stack.emplace(back_stack.top().val, back_stack.top().val);
-            back_stack.pop();
-            while(!back_stack.empty()) {
-                T s{op(back_stack.top().val, front_stack.top().sum)};
-                front_stack.emplace(back_stack.top().val, s);
-                back_stack.pop();
-            }
-        }
-        front_stack.pop();
-    }
+    T query() { return f(get(a), get(b)); }
 };
-template <class T, class Op> auto get_SWAG(const Op &op) { return SWAG<T, Op>(op); }

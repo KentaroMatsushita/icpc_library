@@ -4,9 +4,8 @@ template <typename G> struct SCC {
     vi comp, ord, used;
     int num; // 連結成分の数
 
-    SCC(G &g) : g(g), rg(si(g)), comp(si(g), -1), used(si(g)) {
-        rep(i, g.size()) fore(e, g[i]) rg[e].emplace_back(i);
-        ord.reserve(g.size());
+    SCC(G g) : g(g), rg(si(g)), comp(si(g), -1), ord(si(g)), used(si(g)) {
+        rep(i, si(g)) fore(e, g[i]) rg[e].eb(i);
         build();
     };
     int operator[](int k) { return comp[k]; }
@@ -14,7 +13,7 @@ template <typename G> struct SCC {
         if(used[x]) return;
         used[x] = true;
         fore(e, g[x]) if(!used[e]) dfs(e);
-        ord.emplace_back(x);
+        ord.eb(x);
     }
     void rdfs(int x, int cnt) {
         if(comp[x] != -1) return;

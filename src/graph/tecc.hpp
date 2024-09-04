@@ -1,43 +1,29 @@
-struct TECC : LL {
-  public:
-    using LL::bridge;
-    using LL::g;
-    using LL::LL;
-    using LL::low;
-    using LL::ord;
-
-    vi comp;
-    vector<vi> tree;
-    vector<vi> group;
-
-    int operator[](const int &k) const { return comp[k]; }
-
-    void build() override {
-        LL::build();
-        comp.assign(si(g), -1);
+template <typename G> struct TCC : LL<G> {
+    using L = LL<G>;
+    using L::bridge;
+    using L::g;
+    using L::low;
+    using L::ord;
+    vi cmp;
+    vector<vi> tree, group;
+    void build() {
+        cmp.assign(si(g), -1);
         int k = 0;
-        rep(i, si(comp)) {
-            if(comp[i] == -1) dfs(i, -1, k);
-        }
+        rep(i, si(cmp)) if(cmp[i] == -1) dfs(i, -1, k);
         group.resize(k);
-        rep(i, si(g)) { group[comp[i]].emplace_back(i); }
+        rep(i, si(g)) group[cmp[i]].eb(i);
         tree.resize(k);
         for(auto [a, b] : bridge) {
-            tree[comp[a]].emplace_back(comp[b]);
-            tree[comp[b]].emplace_back(comp[a]);
+            tree[cmp[a]].eb(cmp[b]);
+            tree[cmp[b]].eb(cmp[a]);
         }
     }
-
-    TECC(const vector<vi> &g) : LL(g) { build(); }
-
-  private:
+    TCC(const G &g) : L(g) { build(); }
     void dfs(int x, int p, int &k) {
-        if(p >= 0 && ord[p] >= low[x])
-            comp[x] = comp[p];
+        if(p >= 0 and ord[p] >= low[x])
+            cmp[x] = cmp[p];
         else
-            comp[x] = k++;
-        fore(e, g[x]) {
-            if(comp[e] == -1) dfs(e, x, k);
-        }
+            cmp[x] = k++;
+        fore(e, g[x]) if(cmp[e] == -1) dfs(e, x, k);
     }
 };
