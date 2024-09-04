@@ -5,7 +5,7 @@ data:
     path: src/FPS/FFT.hpp
     title: "FFT (\u9AD8\u901F\u30D5\u30FC\u30EA\u30A8\u5909\u63DB / \u7573\u307F\u8FBC\
       \u307F)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/modint/modint.hpp
     title: Modint
   - icon: ':question:'
@@ -27,48 +27,39 @@ data:
     \ i = a; i < (b); i++)\n#define all(a) begin(a), end(a)\n#define sz(a) ssize(a)\n\
     bool chmin(auto& a, auto b) { return a > b ? a = b, 1 : 0; }\nbool chmax(auto&\
     \ a, auto b) { return a < b ? a = b, 1 : 0; }\n#line 1 \"src/modint/modint.hpp\"\
-    \nconst ll mod = 998244353;\nstruct mm {\n    ll x;\n    mm(ll x_ = 0) : x(x_\
-    \ % mod) {\n        if(x < 0) x += mod;\n    }\n    friend mm operator+(mm a,\
-    \ mm b) { return a.x + b.x; }\n    friend mm operator-(mm a, mm b) { return a.x\
-    \ - b.x; }\n    friend mm operator*(mm a, mm b) { return a.x * b.x; }\n    friend\
-    \ mm operator/(mm a, mm b) { return a * b.inv(); }\n    // 4 \u884C\u30B3\u30D4\
+    \nconstexpr ll mod = 998244353;\nstruct mint {\n    ll x;\n    mint(ll x_ = 0)\
+    \ : x(x_ % mod) {\n        if(x < 0) x += mod;\n    }\n    mint operator-() {\
+    \ return mint(-x); }\n    friend mint operator+(mint a, mint b) { return a.x +\
+    \ b.x; }\n    friend mint operator-(mint a, mint b) { return a.x - b.x; }\n  \
+    \  friend mint operator*(mint a, mint b) { return a.x * b.x; }\n    friend mint\
+    \ operator/(mint a, mint b) { return a * b.inv(); }\n    // 4 \u884C\u30B3\u30D4\
     \u30DA  Alt + Shift + \u30AF\u30EA\u30C3\u30AF\u3067\u8907\u6570\u30AB\u30FC\u30BD\
-    \u30EB\n    friend mm &operator+=(mm &a, mm b) { return a = a.x + b.x; }\n   \
-    \ friend mm &operator-=(mm &a, mm b) { return a = a.x - b.x; }\n    friend mm\
-    \ &operator*=(mm &a, mm b) { return a = a.x * b.x; }\n    friend mm &operator/=(mm\
-    \ &a, mm b) { return a = a * b.inv(); }\n    mm inv() const { return pow(mod -\
-    \ 2); }\n    mm pow(ll b) const {\n        mm a = *this, c = 1;\n        while(b)\
-    \ {\n            if(b & 1) c *= a;\n            a *= a;\n            b >>= 1;\n\
-    \        }\n        return c;\n    }\n};\n#line 1 \"src/FPS/FFT.hpp\"\n// modint\
-    \ \u3092 u32 \u306B\u3057\u3066\u52A0\u6E1B\u7B97\u3092\u771F\u9762\u76EE\u306B\
-    \u3084\u308B\u3068\u901F\u3044\nmm g = 3; // \u539F\u59CB\u6839\nvoid fft(vector<mm>\
-    \ &a) {\n    ll n = sz(a), lg = __lg(n);\n    static auto z = [] {\n        vector<mm>\
-    \ z(30);\n        mm s = 1;\n        rep(i, 2, 32) {\n            z[i - 2] = s\
-    \ * g.pow(mod >> i);\n            s *= g.inv().pow(mod >> i);\n        }\n   \
-    \     return z;\n    }();\n    rep(l, 0, lg) {\n        ll w = 1 << (lg - l -\
-    \ 1);\n        mm s = 1;\n        rep(k, 0, 1 << l) {\n            ll o = k <<\
-    \ (lg - l);\n            rep(i, o, o + w) {\n                mm x = a[i], y =\
-    \ a[i + w] * s;\n                a[i] = x + y;\n                a[i + w] = x -\
-    \ y;\n            }\n            s *= z[countr_zero<uint64_t>(~k)];\n        }\n\
-    \    }\n}\n// \u30B3\u30D4\u30DA\nvoid ifft(vector<mm> &a) {\n    ll n = sz(a),\
-    \ lg = __lg(n);\n    static auto z = [] {\n        vector<mm> z(30);\n       \
-    \ mm s = 1;\n        rep(i, 2, 32) { // g \u3092\u9006\u6570\u306B\n         \
-    \   z[i - 2] = s * g.inv().pow(mod >> i);\n            s *= g.pow(mod >> i);\n\
-    \        }\n        return z;\n    }();\n    for(ll l = lg; l--;) { // \u9006\u9806\
-    \u306B\n        ll w = 1 << (lg - l - 1);\n        mm s = 1;\n        rep(k, 0,\
-    \ 1 << l) {\n            ll o = k << (lg - l);\n            rep(i, o, o + w) {\n\
-    \                mm x = a[i], y = a[i + w]; // *s \u3092\u4E0B\u306B\u79FB\u52D5\
-    \n                a[i] = x + y;\n                a[i + w] = (x - y) * s;\n   \
-    \         }\n            s *= z[countr_zero<uint64_t>(~k)];\n        }\n    }\n\
-    }\nvector<mm> conv(vector<mm> a, vector<mm> b) {\n    if(a.empty() || b.empty())\
-    \ return {};\n    size_t s = si(a) + si(b) - 1, n = bit_ceil(s);\n    // if(min(sz(a),\
-    \ sz(b)) <= 60) \u611A\u76F4\u306B\u639B\u3051\u7B97\n    a.resize(n);\n    b.resize(n);\n\
-    \    fft(a);\n    fft(b);\n    mm inv = mm(n).inv();\n    rep(i, 0, n) a[i] *=\
-    \ b[i] * inv;\n    ifft(a);\n    a.resize(s);\n    return a;\n}\n#line 5 \"test/FPS/FFT.test.cpp\"\
-    \n\nint main() {\n   cin.tie(0)->sync_with_stdio(0);\n   ll N, M;\n   cin >> N\
-    \ >> M;\n   vector<mm> A(N), B(M);\n   for(mm& a : A) cin >> a.x;\n   for(mm&\
-    \ b : B) cin >> b.x;\n\n   auto C = conv(move(A), move(B));\n   rep(i, 0, sz(C))\
-    \ cout << C[i].x << \" \\n\"[i + 1 == sz(C)];\n}\n"
+    \u30EB\n    friend mint &operator+=(mint &a, mint b) { return a = a.x + b.x; }\n\
+    \    friend mint &operator-=(mint &a, mint b) { return a = a.x - b.x; }\n    friend\
+    \ mint &operator*=(mint &a, mint b) { return a = a.x * b.x; }\n    friend mint\
+    \ &operator/=(mint &a, mint b) { return a = a * b.inv(); }\n    mint inv() const\
+    \ { return pow(mod - 2); }\n    mint pow(ll b) const {\n        mint a = *this,\
+    \ c = 1;\n        while(b) {\n            if(b & 1) c *= a;\n            a *=\
+    \ a;\n            b >>= 1;\n        }\n        return c;\n    }\n};\nusing vm\
+    \ = vector<mint>;\n#line 1 \"src/FPS/FFT.hpp\"\nmint g = 3; // \u539F\u59CB\u6839\
+    \nvoid fft(vm &a, bool inv = false) {\n    int n = si(a), s = __lg(n);\n    static\
+    \ vm z, iz;\n    while(si(z) <= s) {\n        z.eb(g.pow(mint(-1).x / (1 << si(z))));\n\
+    \        iz.eb(z.back().inv());\n    }\n    vm b(n);\n    rep(i, 1, s + 1) {\n\
+    \        int w = 1 << s - i;\n        mint base = inv ? iz[i] : z[i], now = 1;\n\
+    \        for(int y = 0; y < n / 2; y += w) {\n            rep(x, w) {\n      \
+    \          auto l = a[y << 1 | x], r = now * a[y << 1 | x | w];\n            \
+    \    b[y | x] = l + r, b[y | x | n >> 1] = l - r;\n            }\n           \
+    \ now *= base;\n        }\n        swap(a, b);\n    }\n}\n\nvm mul(vm a, vm b)\
+    \ {\n    int n = si(a), m = si(b);\n    if(!n or !m) return {};\n    if(min(n,\
+    \ m) <= 30) {\n        vm ans(n + m - 1);\n        rep(i, n) rep(j, m) ans[i +\
+    \ j] += a[i] * b[j];\n        return ans;\n    }\n    int N = n + m - 1;\n   \
+    \ int z = bit_ceil(unsigned(N));\n    a.resize(z), b.resize(z);\n    fft(a), fft(b);\n\
+    \    rep(i, z) a[i] *= b[i];\n    fft(a, true);\n    a.resize(n + m - 1);\n  \
+    \  mint iz = mint(z).inv();\n    fore(e, a) e *= iz;\n    return a;\n}\n#line\
+    \ 5 \"test/FPS/FFT.test.cpp\"\n\nint main() {\n   cin.tie(0)->sync_with_stdio(0);\n\
+    \   ll N, M;\n   cin >> N >> M;\n   vector<mm> A(N), B(M);\n   for(mm& a : A)\
+    \ cin >> a.x;\n   for(mm& b : B) cin >> b.x;\n\n   auto C = conv(move(A), move(B));\n\
+    \   rep(i, 0, sz(C)) cout << C[i].x << \" \\n\"[i + 1 == sz(C)];\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod\"\n#include\
     \ \"test/template.hpp\"\n#include \"src/modint/modint.hpp\"\n#include \"src/FPS/FFT.hpp\"\
     \n\nint main() {\n   cin.tie(0)->sync_with_stdio(0);\n   ll N, M;\n   cin >> N\
@@ -82,7 +73,7 @@ data:
   isVerificationFile: true
   path: test/FPS/FFT.test.cpp
   requiredBy: []
-  timestamp: '2024-08-12 04:22:28+09:00'
+  timestamp: '2024-09-04 17:24:13+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/FPS/FFT.test.cpp

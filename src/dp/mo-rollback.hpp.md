@@ -8,55 +8,48 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"src/dp/mo-rollback.hpp\"\nstruct MoRollBack {\n    using\
+  bundledCode: "#line 1 \"src/dp/mo-rollback.hpp\"\n\nstruct MoRollBack {\n    using\
     \ ADD = function<void(int)>;\n    using REM = function<void(int)>;\n    using\
-    \ RESET = function<void()>;\n    using SNAPSHOT = function<void()>;\n    using\
-    \ ROLLBACK = function<void()>;\n    int width;\n    vector<int> left, right, order;\n\
-    \    MoRollBack(int N, int Q) : width((int)sqrt(N)), order(Q) { iota(begin(order),\
-    \ end(order), 0); }\n    void add(int l, int r) { /* [l, r) */\n        left.emplace_back(l);\n\
-    \        right.emplace_back(r);\n    }\n    int run(const ADD &add, const REM\
-    \ &rem, const RESET &reset, const SNAPSHOT &snapshot, const ROLLBACK &rollback)\
-    \ {\n        assert(left.size() == order.size());\n        sort(begin(order),\
-    \ end(order), [&](int a, int b) {\n            int ablock = left[a] / width, bblock\
-    \ = left[b] / width;\n            if(ablock != bblock) return ablock < bblock;\n\
-    \            return right[a] < right[b];\n        });\n        reset();\n    \
-    \    for(auto idx : order) {\n            if(right[idx] - left[idx] < width) {\n\
-    \                for(int i = left[idx]; i < right[idx]; i++) add(i);\n       \
-    \         rem(idx);\n                rollback();\n            }\n        }\n \
-    \       int nr = 0, last_block = -1;\n        for(auto idx : order) {\n      \
-    \      if(right[idx] - left[idx] < width) continue;\n            int block = left[idx]\
-    \ / width;\n            if(last_block != block) {\n                reset();\n\
-    \                last_block = block;\n                nr = (block + 1) * width;\n\
-    \            }\n            while(nr < right[idx]) add(nr++);\n            snapshot();\n\
-    \            for(int j = (block + 1) * width - 1; j >= left[idx]; j--) add(j);\n\
-    \            rem(idx);\n            rollback();\n        }\n    }\n};\n"
-  code: "struct MoRollBack {\n    using ADD = function<void(int)>;\n    using REM\
-    \ = function<void(int)>;\n    using RESET = function<void()>;\n    using SNAPSHOT\
-    \ = function<void()>;\n    using ROLLBACK = function<void()>;\n    int width;\n\
-    \    vector<int> left, right, order;\n    MoRollBack(int N, int Q) : width((int)sqrt(N)),\
-    \ order(Q) { iota(begin(order), end(order), 0); }\n    void add(int l, int r)\
-    \ { /* [l, r) */\n        left.emplace_back(l);\n        right.emplace_back(r);\n\
-    \    }\n    int run(const ADD &add, const REM &rem, const RESET &reset, const\
-    \ SNAPSHOT &snapshot, const ROLLBACK &rollback) {\n        assert(left.size()\
-    \ == order.size());\n        sort(begin(order), end(order), [&](int a, int b)\
-    \ {\n            int ablock = left[a] / width, bblock = left[b] / width;\n   \
-    \         if(ablock != bblock) return ablock < bblock;\n            return right[a]\
-    \ < right[b];\n        });\n        reset();\n        for(auto idx : order) {\n\
-    \            if(right[idx] - left[idx] < width) {\n                for(int i =\
-    \ left[idx]; i < right[idx]; i++) add(i);\n                rem(idx);\n       \
-    \         rollback();\n            }\n        }\n        int nr = 0, last_block\
-    \ = -1;\n        for(auto idx : order) {\n            if(right[idx] - left[idx]\
-    \ < width) continue;\n            int block = left[idx] / width;\n           \
-    \ if(last_block != block) {\n                reset();\n                last_block\
-    \ = block;\n                nr = (block + 1) * width;\n            }\n       \
-    \     while(nr < right[idx]) add(nr++);\n            snapshot();\n           \
-    \ for(int j = (block + 1) * width - 1; j >= left[idx]; j--) add(j);\n        \
-    \    rem(idx);\n            rollback();\n        }\n    }\n};"
+    \ RESET = function<void()>;\n    using SNAP = function<void()>;\n    using ROLLBACK\
+    \ = function<void()>;\n    int w;\n    vector<int> l, r, ord;\n    MoRollBack(int\
+    \ n, int q) : w((int)sqrt(n)), ord(q) { iota(all(ord), 0); }\n    void add(int\
+    \ a, int b) { /* [l, r) */\n        l.emplace_back(a);\n        r.emplace_back(b);\n\
+    \    }\n    void run(const ADD &add, const REM &rem, const RESET &reset, const\
+    \ SNAP &snap, const ROLLBACK &rollback) {\n        sort(begin(ord), end(ord),\
+    \ [&](int a, int b) {\n            int ab = l[a] / w, bb = l[b] / w;\n       \
+    \     if(ab != bb) return ab < bb;\n            return r[a] < r[b];\n        });\n\
+    \        reset();\n        for(auto idx : ord) {\n            if(r[idx] - l[idx]\
+    \ < w) {\n                rep(i, l[idx], r[idx]) add(i);\n                rem(idx);\n\
+    \                rollback();\n            }\n        }\n        int nr = 0, lb\
+    \ = -1;\n        for(auto idx : ord) {\n            if(r[idx] - l[idx] < w) continue;\n\
+    \            int b = l[idx] / w;\n            if(lb != b) {\n                reset();\n\
+    \                lb = b;\n                nr = (b + 1) * w;\n            }\n \
+    \           while(nr < r[idx]) add(nr++);\n            snap();\n            per(j,\
+    \ (b + 1) * w, l[idx]) add(j);\n            rem(idx);\n            rollback();\n\
+    \        }\n    }\n};\n"
+  code: "\nstruct MoRollBack {\n    using ADD = function<void(int)>;\n    using REM\
+    \ = function<void(int)>;\n    using RESET = function<void()>;\n    using SNAP\
+    \ = function<void()>;\n    using ROLLBACK = function<void()>;\n    int w;\n  \
+    \  vector<int> l, r, ord;\n    MoRollBack(int n, int q) : w((int)sqrt(n)), ord(q)\
+    \ { iota(all(ord), 0); }\n    void add(int a, int b) { /* [l, r) */\n        l.emplace_back(a);\n\
+    \        r.emplace_back(b);\n    }\n    void run(const ADD &add, const REM &rem,\
+    \ const RESET &reset, const SNAP &snap, const ROLLBACK &rollback) {\n        sort(begin(ord),\
+    \ end(ord), [&](int a, int b) {\n            int ab = l[a] / w, bb = l[b] / w;\n\
+    \            if(ab != bb) return ab < bb;\n            return r[a] < r[b];\n \
+    \       });\n        reset();\n        for(auto idx : ord) {\n            if(r[idx]\
+    \ - l[idx] < w) {\n                rep(i, l[idx], r[idx]) add(i);\n          \
+    \      rem(idx);\n                rollback();\n            }\n        }\n    \
+    \    int nr = 0, lb = -1;\n        for(auto idx : ord) {\n            if(r[idx]\
+    \ - l[idx] < w) continue;\n            int b = l[idx] / w;\n            if(lb\
+    \ != b) {\n                reset();\n                lb = b;\n               \
+    \ nr = (b + 1) * w;\n            }\n            while(nr < r[idx]) add(nr++);\n\
+    \            snap();\n            per(j, (b + 1) * w, l[idx]) add(j);\n      \
+    \      rem(idx);\n            rollback();\n        }\n    }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/dp/mo-rollback.hpp
   requiredBy: []
-  timestamp: '2024-08-12 04:22:28+09:00'
+  timestamp: '2024-09-04 17:24:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/dp/mo-rollback.hpp

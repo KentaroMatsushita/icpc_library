@@ -23,13 +23,11 @@ data:
     \ i = a; i < (b); i++)\n#define all(a) begin(a), end(a)\n#define sz(a) ssize(a)\n\
     bool chmin(auto& a, auto b) { return a > b ? a = b, 1 : 0; }\nbool chmax(auto&\
     \ a, auto b) { return a < b ? a = b, 1 : 0; }\n#line 1 \"src/data-structure/BIT.hpp\"\
-    \nstruct BIT {\n    vector<ll> a;\n    BIT(ll n) : a(n + 1) {}\n    void add(ll\
-    \ i, ll x) { // A[i] += x\n        i++;\n        while(i < si(a)) {\n        \
-    \    a[i] += x;\n            i += i & -i;\n        }\n    }\n    ll sum(ll r)\
-    \ {\n        ll s = 0;\n        while(r) {\n            s += a[r];\n         \
-    \   r -= r & -r;\n        }\n        return s;\n    }\n    ll sum(ll l, ll r)\
-    \ { // sum of A[l, r)\n        return sum(r) - sum(l);\n    }\n};\n#line 4 \"\
-    test/data-structure/BIT.test.cpp\"\n\nint main() {\n   cin.tie(0)->sync_with_stdio(0);\n\
+    \nstruct BIT {\n    vl a;\n    BIT(ll n) : a(n + 1) {}\n    void add(ll i, ll\
+    \ x) {\n        i++;\n        while(i < si(a)) a[i] += x, i += i & -i;\n    }\n\
+    \    ll sum(ll r) {\n        ll s = 0;\n        while(r) s += a[r], r -= r & -r;\n\
+    \        return s;\n    }\n    ll sum(ll l, ll r) { return sum(r) - sum(l); }\n\
+    };\n#line 4 \"test/data-structure/BIT.test.cpp\"\n\nint main() {\n   cin.tie(0)->sync_with_stdio(0);\n\
     \n   ll N, Q;\n   cin >> N >> Q;\n\n   BIT A(N);\n   rep(i, 0, N) {\n      ll\
     \ a;\n      cin >> a;\n      A.add(i, a);\n   }\n\n   while(Q--) {\n      ll a,\
     \ b, c;\n      cin >> a >> b >> c;\n      if(a == 0) A.add(b, c);\n      else\
@@ -47,7 +45,7 @@ data:
   isVerificationFile: true
   path: test/data-structure/BIT.test.cpp
   requiredBy: []
-  timestamp: '2024-08-12 04:22:28+09:00'
+  timestamp: '2024-09-04 17:24:13+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/data-structure/BIT.test.cpp

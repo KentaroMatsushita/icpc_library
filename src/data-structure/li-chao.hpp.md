@@ -8,70 +8,60 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"src/data-structure/li-chao.hpp\"\ntemplate <typename T>\
-    \ struct li_chao_tree {\n    struct line {\n        T a, b;\n        line() :\
-    \ a(0), b(INF) {}\n        line(T a, T b) : a(a), b(b) {}\n        T get(T x)\
-    \ { return a * x + b; }\n    };\n    int N;\n    vector<T> x;\n    vector<line>\
-    \ ST;\n    li_chao_tree() {}\n    li_chao_tree(const vector<T> &x2) {\n      \
-    \  x = x2;\n        sort(x.begin(), x.end());\n        int N2 = x.size();\n  \
-    \      N = 1;\n        while(N < N2) { N *= 2; }\n        x.resize(N);\n     \
-    \   for(int i = N2; i < N; i++) { x[i] = x[N2 - 1]; }\n        ST = vector<line>(N\
-    \ * 2 - 1);\n    }\n    void line_add(line L, int i, int l, int r) {\n       \
-    \ T la = L.get(x[l]);\n        T lb = ST[i].get(x[l]);\n        T ra = L.get(x[r\
-    \ - 1]);\n        T rb = ST[i].get(x[r - 1]);\n        if(la >= lb && ra >= rb)\
-    \ {\n            return;\n        } else if(la <= lb && ra <= rb) {\n        \
-    \    ST[i] = L;\n        } else {\n            int m = (l + r) / 2;\n        \
-    \    T ma = L.get(x[m]);\n            T mb = ST[i].get(x[m]);\n            if(ma\
-    \ < mb) {\n                swap(L, ST[i]);\n                swap(la, lb);\n  \
-    \              swap(ra, rb);\n            }\n            if(la < lb) { line_add(L,\
-    \ i * 2 + 1, l, m); }\n            if(ra < rb) { line_add(L, i * 2 + 2, m, r);\
-    \ }\n        }\n    }\n    void line_add(T a, T b) { line_add(line(a, b), 0, 0,\
-    \ N); }\n    void segment_add(int L, int R, line S, int i, int l, int r) {\n \
-    \       if(r <= L || R <= l) {\n            return;\n        } else if(L <= l\
-    \ && r <= R) {\n            line_add(S, i, l, r);\n        } else {\n        \
-    \    int m = (l + r) / 2;\n            segment_add(L, R, S, i * 2 + 1, l, m);\n\
-    \            segment_add(L, R, S, i * 2 + 2, m, r);\n        }\n    }\n    void\
-    \ segment_add(T l, T r, T a, T b) {\n        int pl = lower_bound(x.begin(), x.end(),\
-    \ l) - x.begin();\n        int pr = lower_bound(x.begin(), x.end(), r) - x.begin();\n\
-    \        segment_add(pl, pr, line(a, b), 0, 0, N);\n    }\n    T get(T x2) {\n\
-    \        int p = lower_bound(x.begin(), x.end(), x2) - x.begin();\n        p +=\
-    \ N - 1;\n        T ans = INF;\n        ans = min(ans, ST[p].get(x2));\n     \
-    \   while(p > 0) {\n            p = (p - 1) / 2;\n            ans = min(ans, ST[p].get(x2));\n\
-    \        }\n        return ans;\n    }\n};\n"
-  code: "template <typename T> struct li_chao_tree {\n    struct line {\n        T\
-    \ a, b;\n        line() : a(0), b(INF) {}\n        line(T a, T b) : a(a), b(b)\
-    \ {}\n        T get(T x) { return a * x + b; }\n    };\n    int N;\n    vector<T>\
-    \ x;\n    vector<line> ST;\n    li_chao_tree() {}\n    li_chao_tree(const vector<T>\
-    \ &x2) {\n        x = x2;\n        sort(x.begin(), x.end());\n        int N2 =\
-    \ x.size();\n        N = 1;\n        while(N < N2) { N *= 2; }\n        x.resize(N);\n\
-    \        for(int i = N2; i < N; i++) { x[i] = x[N2 - 1]; }\n        ST = vector<line>(N\
-    \ * 2 - 1);\n    }\n    void line_add(line L, int i, int l, int r) {\n       \
-    \ T la = L.get(x[l]);\n        T lb = ST[i].get(x[l]);\n        T ra = L.get(x[r\
-    \ - 1]);\n        T rb = ST[i].get(x[r - 1]);\n        if(la >= lb && ra >= rb)\
-    \ {\n            return;\n        } else if(la <= lb && ra <= rb) {\n        \
-    \    ST[i] = L;\n        } else {\n            int m = (l + r) / 2;\n        \
-    \    T ma = L.get(x[m]);\n            T mb = ST[i].get(x[m]);\n            if(ma\
-    \ < mb) {\n                swap(L, ST[i]);\n                swap(la, lb);\n  \
-    \              swap(ra, rb);\n            }\n            if(la < lb) { line_add(L,\
-    \ i * 2 + 1, l, m); }\n            if(ra < rb) { line_add(L, i * 2 + 2, m, r);\
-    \ }\n        }\n    }\n    void line_add(T a, T b) { line_add(line(a, b), 0, 0,\
-    \ N); }\n    void segment_add(int L, int R, line S, int i, int l, int r) {\n \
-    \       if(r <= L || R <= l) {\n            return;\n        } else if(L <= l\
-    \ && r <= R) {\n            line_add(S, i, l, r);\n        } else {\n        \
-    \    int m = (l + r) / 2;\n            segment_add(L, R, S, i * 2 + 1, l, m);\n\
-    \            segment_add(L, R, S, i * 2 + 2, m, r);\n        }\n    }\n    void\
-    \ segment_add(T l, T r, T a, T b) {\n        int pl = lower_bound(x.begin(), x.end(),\
-    \ l) - x.begin();\n        int pr = lower_bound(x.begin(), x.end(), r) - x.begin();\n\
-    \        segment_add(pl, pr, line(a, b), 0, 0, N);\n    }\n    T get(T x2) {\n\
-    \        int p = lower_bound(x.begin(), x.end(), x2) - x.begin();\n        p +=\
-    \ N - 1;\n        T ans = INF;\n        ans = min(ans, ST[p].get(x2));\n     \
-    \   while(p > 0) {\n            p = (p - 1) / 2;\n            ans = min(ans, ST[p].get(x2));\n\
-    \        }\n        return ans;\n    }\n};"
+  bundledCode: "#line 1 \"src/data-structure/li-chao.hpp\"\n\nstruct lctree {\n  \
+    \  struct line {\n        ll a, b;\n        line() : a(0), b(INFL) {}\n      \
+    \  line(ll a, ll b) : a(a), b(b) {}\n        ll get(ll x) { return a * x + b;\
+    \ }\n        inline bool over(line r, ll x) { return get(x) < r.get(x); }\n  \
+    \  };\n    int n;\n\n    vector<ll> x;\n    vector<line> seg;\n    lctree() {}\n\
+    \    lctree(const vector<ll> &_x) : x(_x) {\n        sort(all(x));\n        int\
+    \ n2 = si(x);\n        n = 1;\n        while(n < n2) n <<= 1;\n        x.resize(n);\n\
+    \        rep(i, n2, n) x[i] = x[n2 - 1];\n        seg = vector<line>(n * 2);\n\
+    \    }\n    void upd(line L, int i, int l, int r) {\n        while(true) {\n \
+    \           int mid = l + r >> 1;\n            bool lov = L.over(seg[i], x[l]);\n\
+    \            bool rov = L.over(seg[i], x[r - 1]);\n            if(lov == rov)\
+    \ {\n                if(lov) swap(seg[i], L);\n                return;\n     \
+    \       }\n            bool mov = L.over(seg[i], x[mid]);\n            if(mov)\
+    \ swap(seg[i], L);\n            if(lov != mov) {\n                i = (i << 1),\
+    \ r = mid;\n            } else {\n                i = (i << 1) + 1, l = mid;\n\
+    \            }\n        }\n    }\n    void upd(line L, unsigned i) {\n       \
+    \ int ub = bit_width(i) - 1;\n        int l = (n >> ub) * (i - (1 << ub));\n \
+    \       int r = l + (n >> ub);\n        upd(L, i, l, r);\n    }\n    void update(ll\
+    \ a, ll b) { upd(line(a, b), 1, 0, n); }\n    void update_segment(ll l, ll r,\
+    \ ll a, ll b) {\n        l = lb(x, l) + n, r = lb(x, r) + n;\n        line L(a,\
+    \ b);\n        for(; l < r; l >>= 1, r >>= 1) {\n            if(l & 1) upd(L,\
+    \ l++);\n            if(r & 1) upd(L, --r);\n        }\n    }\n    ll query(ll\
+    \ t) {\n        ll k = lb(x, t);\n        k += n;\n        ll res = seg[k].get(t);\n\
+    \        while(k > 1) {\n            k >>= 1;\n            chmin(res, seg[k].get(t));\n\
+    \        }\n        return res;\n    }\n};\n"
+  code: "\nstruct lctree {\n    struct line {\n        ll a, b;\n        line() :\
+    \ a(0), b(INFL) {}\n        line(ll a, ll b) : a(a), b(b) {}\n        ll get(ll\
+    \ x) { return a * x + b; }\n        inline bool over(line r, ll x) { return get(x)\
+    \ < r.get(x); }\n    };\n    int n;\n\n    vector<ll> x;\n    vector<line> seg;\n\
+    \    lctree() {}\n    lctree(const vector<ll> &_x) : x(_x) {\n        sort(all(x));\n\
+    \        int n2 = si(x);\n        n = 1;\n        while(n < n2) n <<= 1;\n   \
+    \     x.resize(n);\n        rep(i, n2, n) x[i] = x[n2 - 1];\n        seg = vector<line>(n\
+    \ * 2);\n    }\n    void upd(line L, int i, int l, int r) {\n        while(true)\
+    \ {\n            int mid = l + r >> 1;\n            bool lov = L.over(seg[i],\
+    \ x[l]);\n            bool rov = L.over(seg[i], x[r - 1]);\n            if(lov\
+    \ == rov) {\n                if(lov) swap(seg[i], L);\n                return;\n\
+    \            }\n            bool mov = L.over(seg[i], x[mid]);\n            if(mov)\
+    \ swap(seg[i], L);\n            if(lov != mov) {\n                i = (i << 1),\
+    \ r = mid;\n            } else {\n                i = (i << 1) + 1, l = mid;\n\
+    \            }\n        }\n    }\n    void upd(line L, unsigned i) {\n       \
+    \ int ub = bit_width(i) - 1;\n        int l = (n >> ub) * (i - (1 << ub));\n \
+    \       int r = l + (n >> ub);\n        upd(L, i, l, r);\n    }\n    void update(ll\
+    \ a, ll b) { upd(line(a, b), 1, 0, n); }\n    void update_segment(ll l, ll r,\
+    \ ll a, ll b) {\n        l = lb(x, l) + n, r = lb(x, r) + n;\n        line L(a,\
+    \ b);\n        for(; l < r; l >>= 1, r >>= 1) {\n            if(l & 1) upd(L,\
+    \ l++);\n            if(r & 1) upd(L, --r);\n        }\n    }\n    ll query(ll\
+    \ t) {\n        ll k = lb(x, t);\n        k += n;\n        ll res = seg[k].get(t);\n\
+    \        while(k > 1) {\n            k >>= 1;\n            chmin(res, seg[k].get(t));\n\
+    \        }\n        return res;\n    }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/data-structure/li-chao.hpp
   requiredBy: []
-  timestamp: '2024-08-12 04:22:28+09:00'
+  timestamp: '2024-09-04 17:24:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/data-structure/li-chao.hpp

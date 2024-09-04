@@ -8,42 +8,58 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"src/data-structure/rbst.hpp\"\ninline int xorshift() {\n\
-    \    static int w = 1234567890;\n    w = w ^ (w << 17);\n    w = w ^ (w >> 13);\n\
-    \    w = w ^ (w << 5);\n    return w;\n}\nstruct Node {\n    Node *l, *r;\n  \
-    \  int v, s;\n} buf[200010];\n// Not Verified\nint bufUsed;\nNode *NewNode(int\
-    \ v) {\n    Node *ptr = buf + (bufUsed++);\n    ptr->l = NULL;\n    ptr->r = NULL;\n\
-    \    ptr->s = 1;\n    ptr->v = v;\n    return ptr;\n}\nNode *Merge(Node *a, Node\
-    \ *b) {\n    if(!a) return b;\n    if(!b) return a;\n    int s = a->s + b->s,\
-    \ x = xorshift() % s;\n    if(x < a->s) {\n        a->r = Merge(a->r, b);\n  \
-    \      a->s = s;\n        return a;\n    } else {\n        b->l = Merge(a, b->l);\n\
-    \        b->s = s;\n        return b;\n    }\n}\nusing pn = pair<Node *, Node\
-    \ *>;\npn Split(Node *x, int t) {\n    if(!x) return pn(0, 0);\n    if(t <= x->v)\
-    \ {\n        pn c = Split(x->l, t);\n        if(c.first) x->s -= c.first->s;\n\
-    \        x->l = c.second;\n        return pn(c.first, x);\n    } else {\n    \
-    \    pn c = Split(x->r, t);\n        if(c.second) x->s -= c.second->s;\n     \
-    \   x->r = c.first;\n        return pn(x, c.second);\n    }\n}\nint MaxValue(Node\
-    \ *x) {\n    while(x->r) x = x->r;\n    return x->v;\n}\n"
-  code: "inline int xorshift() {\n    static int w = 1234567890;\n    w = w ^ (w <<\
-    \ 17);\n    w = w ^ (w >> 13);\n    w = w ^ (w << 5);\n    return w;\n}\nstruct\
-    \ Node {\n    Node *l, *r;\n    int v, s;\n} buf[200010];\n// Not Verified\nint\
-    \ bufUsed;\nNode *NewNode(int v) {\n    Node *ptr = buf + (bufUsed++);\n    ptr->l\
-    \ = NULL;\n    ptr->r = NULL;\n    ptr->s = 1;\n    ptr->v = v;\n    return ptr;\n\
-    }\nNode *Merge(Node *a, Node *b) {\n    if(!a) return b;\n    if(!b) return a;\n\
-    \    int s = a->s + b->s, x = xorshift() % s;\n    if(x < a->s) {\n        a->r\
-    \ = Merge(a->r, b);\n        a->s = s;\n        return a;\n    } else {\n    \
-    \    b->l = Merge(a, b->l);\n        b->s = s;\n        return b;\n    }\n}\n\
-    using pn = pair<Node *, Node *>;\npn Split(Node *x, int t) {\n    if(!x) return\
-    \ pn(0, 0);\n    if(t <= x->v) {\n        pn c = Split(x->l, t);\n        if(c.first)\
-    \ x->s -= c.first->s;\n        x->l = c.second;\n        return pn(c.first, x);\n\
-    \    } else {\n        pn c = Split(x->r, t);\n        if(c.second) x->s -= c.second->s;\n\
-    \        x->r = c.first;\n        return pn(x, c.second);\n    }\n}\nint MaxValue(Node\
-    \ *x) {\n    while(x->r) x = x->r;\n    return x->v;\n}"
+  bundledCode: "#line 1 \"src/data-structure/rbst.hpp\"\n\ntemplate <typename T, T\
+    \ (*f)(T, T), T (*e)()> struct RBST {\n    inline int rnd() {\n        static\
+    \ int x = 123456789;\n        static int y = 362436069;\n        static int z\
+    \ = 521288629;\n        static int w = 88675123;\n        int t;\n\n        t\
+    \ = x ^ (x << 11);\n        x = y;\n        y = z;\n        z = w;\n        return\
+    \ w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));\n    }\n    struct node {\n        node\
+    \ *l, *r;\n        int cnt;\n        T x, sum;\n        node() = default;\n  \
+    \      node(T x) : x(x), sum(x), l(0), r(0) { cnt = 1; }\n    };\n    RBST(int\
+    \ n) : pool(n) {}\n    int cnt(const node *t) { return t ? t->cnt : 0; }\n   \
+    \ T sum(const node *t) { return t ? t->sum : e(); }\n    node *update(node *t)\
+    \ {\n        t->cnt = cnt(t->l) + cnt(t->r) + 1;\n        t->sum = f(f(sum(t->l),\
+    \ t->x), sum(t->r));\n        return t;\n    }\n    vector<node> pool;\n    int\
+    \ ptr = 0;\n    inline node *alloc(const T &v) {\n        if(si(pool) == ptr)\
+    \ pool.resize(si(pool) * 2);\n        return &(pool[ptr++] = node(v));\n    }\n\
+    \    node *merge(node *l, node *r) {\n        if(!l or !r) return l ? l : r;\n\
+    \        if(rnd() % (cnt(l) + cnt(r)) < cnt(l)) {\n            l->r = merge(l->r,\
+    \ r);\n            return update(l);\n        }\n        r->l = merge(l, r->l);\n\
+    \        return update(r);\n    }\n\n    pair<node *, node *> split(node *t, int\
+    \ k) {\n        if(!t) return {t, t};\n        if(k <= cnt(t->l)) {\n        \
+    \    auto [l, r] = split(t->l, k);\n            t->l = r;\n            return\
+    \ {l, update(t)};\n        }\n        auto [l, r] = split(t->r, k - cnt(t->l)\
+    \ - 1);\n        t->r = l;\n        return {update(t), r};\n    }\n\n    void\
+    \ insert(node *&t, int k, const T &v) {\n        auto [l, r] = split(t, k);\n\
+    \        t = merge(merge(l, alloc(v)), r);\n    }\n};\n"
+  code: "\ntemplate <typename T, T (*f)(T, T), T (*e)()> struct RBST {\n    inline\
+    \ int rnd() {\n        static int x = 123456789;\n        static int y = 362436069;\n\
+    \        static int z = 521288629;\n        static int w = 88675123;\n       \
+    \ int t;\n\n        t = x ^ (x << 11);\n        x = y;\n        y = z;\n     \
+    \   z = w;\n        return w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));\n    }\n    struct\
+    \ node {\n        node *l, *r;\n        int cnt;\n        T x, sum;\n        node()\
+    \ = default;\n        node(T x) : x(x), sum(x), l(0), r(0) { cnt = 1; }\n    };\n\
+    \    RBST(int n) : pool(n) {}\n    int cnt(const node *t) { return t ? t->cnt\
+    \ : 0; }\n    T sum(const node *t) { return t ? t->sum : e(); }\n    node *update(node\
+    \ *t) {\n        t->cnt = cnt(t->l) + cnt(t->r) + 1;\n        t->sum = f(f(sum(t->l),\
+    \ t->x), sum(t->r));\n        return t;\n    }\n    vector<node> pool;\n    int\
+    \ ptr = 0;\n    inline node *alloc(const T &v) {\n        if(si(pool) == ptr)\
+    \ pool.resize(si(pool) * 2);\n        return &(pool[ptr++] = node(v));\n    }\n\
+    \    node *merge(node *l, node *r) {\n        if(!l or !r) return l ? l : r;\n\
+    \        if(rnd() % (cnt(l) + cnt(r)) < cnt(l)) {\n            l->r = merge(l->r,\
+    \ r);\n            return update(l);\n        }\n        r->l = merge(l, r->l);\n\
+    \        return update(r);\n    }\n\n    pair<node *, node *> split(node *t, int\
+    \ k) {\n        if(!t) return {t, t};\n        if(k <= cnt(t->l)) {\n        \
+    \    auto [l, r] = split(t->l, k);\n            t->l = r;\n            return\
+    \ {l, update(t)};\n        }\n        auto [l, r] = split(t->r, k - cnt(t->l)\
+    \ - 1);\n        t->r = l;\n        return {update(t), r};\n    }\n\n    void\
+    \ insert(node *&t, int k, const T &v) {\n        auto [l, r] = split(t, k);\n\
+    \        t = merge(merge(l, alloc(v)), r);\n    }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/data-structure/rbst.hpp
   requiredBy: []
-  timestamp: '2024-08-12 04:22:28+09:00'
+  timestamp: '2024-09-04 17:24:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/data-structure/rbst.hpp

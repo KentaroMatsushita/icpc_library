@@ -9,16 +9,16 @@ data:
   - icon: ':x:'
     path: test/data-structure/BIT.test.cpp
     title: test/data-structure/BIT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/data-structure/FastSet.test.cpp
     title: test/data-structure/FastSet.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/math/ExtGCD.test.cpp
     title: test/math/ExtGCD.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/modint/BarrettReduction.test.cpp
     title: test/modint/BarrettReduction.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/modint/modint.test.cpp
     title: test/modint/modint.test.cpp
   - icon: ':heavy_check_mark:'
