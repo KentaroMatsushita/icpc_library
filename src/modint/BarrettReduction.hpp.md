@@ -12,45 +12,44 @@ data:
   attributes:
     links: []
   bundledCode: "#line 1 \"src/modint/BarrettReduction.hpp\"\n\nusing U = uint64_t;\n\
-    struct Barret {\n    U m, im;\n    Barret(U mod) : m(mod), im(-1ULL / m + 1) {}\n\
-    \    U mul(U a, U b) const {\n        a *= b;\n        U x = ((__uint128_t)a *\
-    \ im) >> 64;\n        a -= x * m;\n        if((ll)a < 0) a += m;\n        return\
-    \ a;\n    }\n};\n\nconstexpr ll mod = 998244353;\nstatic Barret b(mod);\nstruct\
-    \ mint {\n    int x;\n    mint(ll x_ = 0) : x((x_ % mod) + mod) {\n        if(x\
-    \ >= mod) x -= mod;\n    }\n    mint &s(uint xx) { return x = xx < mod ? xx :\
-    \ xx - mod, *this; }\n    mint operator-() { return mint(-x); }\n    mint &operator+=(const\
-    \ mint &r) { return s(x + r.x); }\n    mint &operator-=(const mint &r) { return\
-    \ s(x + mod - r.x); }\n    mint &operator*=(const mint &r) { return x = b.mul(x,\
-    \ r.x), *this; }\n    mint &operator/=(const mint &r) { return *this *= r.inv();\
-    \ }\n    friend mint operator+(mint l, mint r) { return l += r; }\n    friend\
-    \ mint operator-(mint l, mint r) { return l -= r; }\n    friend mint operator*(mint\
-    \ l, mint r) { return l *= r; }\n    friend mint operator/(mint l, mint r) { return\
-    \ l /= r; }\n    mint inv() const { return pow(mod - 2); }\n    mint pow(ll b)\
-    \ const {\n        mint a = *this, c = 1;\n        while(b) {\n            if(b\
-    \ & 1) c *= a;\n            a *= a;\n            b >>= 1;\n        }\n       \
-    \ return c;\n    }\n};\nusing vm = vector<mint>;\n"
-  code: "\nusing U = uint64_t;\nstruct Barret {\n    U m, im;\n    Barret(U mod) :\
-    \ m(mod), im(-1ULL / m + 1) {}\n    U mul(U a, U b) const {\n        a *= b;\n\
-    \        U x = ((__uint128_t)a * im) >> 64;\n        a -= x * m;\n        if((ll)a\
-    \ < 0) a += m;\n        return a;\n    }\n};\n\nconstexpr ll mod = 998244353;\n\
-    static Barret b(mod);\nstruct mint {\n    int x;\n    mint(ll x_ = 0) : x((x_\
-    \ % mod) + mod) {\n        if(x >= mod) x -= mod;\n    }\n    mint &s(uint xx)\
-    \ { return x = xx < mod ? xx : xx - mod, *this; }\n    mint operator-() { return\
-    \ mint(-x); }\n    mint &operator+=(const mint &r) { return s(x + r.x); }\n  \
-    \  mint &operator-=(const mint &r) { return s(x + mod - r.x); }\n    mint &operator*=(const\
-    \ mint &r) { return x = b.mul(x, r.x), *this; }\n    mint &operator/=(const mint\
-    \ &r) { return *this *= r.inv(); }\n    friend mint operator+(mint l, mint r)\
-    \ { return l += r; }\n    friend mint operator-(mint l, mint r) { return l -=\
-    \ r; }\n    friend mint operator*(mint l, mint r) { return l *= r; }\n    friend\
-    \ mint operator/(mint l, mint r) { return l /= r; }\n    mint inv() const { return\
-    \ pow(mod - 2); }\n    mint pow(ll b) const {\n        mint a = *this, c = 1;\n\
-    \        while(b) {\n            if(b & 1) c *= a;\n            a *= a;\n    \
-    \        b >>= 1;\n        }\n        return c;\n    }\n};\nusing vm = vector<mint>;\n"
+    struct Barret {\n   U m, im;\n   Barret(U mod) : m(mod), im(-1ULL / m + 1) {}\n\
+    \   U mul(U a, U b) const {\n      a *= b;\n      U x = ((__uint128_t)a * im)\
+    \ >> 64;\n      a -= x * m;\n      if((ll)a < 0) a += m;\n      return a;\n  \
+    \ }\n};\n\nconstexpr ll mod = 998244353;\nstatic Barret b(mod);\nstruct mint {\n\
+    \   int x;\n   mint(ll x_ = 0) : x((x_ % mod) + mod) {\n      if(x >= mod) x -=\
+    \ mod;\n   }\n   mint& s(uint xx) { return x = xx < mod ? xx : xx - mod, *this;\
+    \ }\n   mint operator-() { return mint(-x); }\n   mint& operator+=(const mint&\
+    \ r) { return s(x + r.x); }\n   mint& operator-=(const mint& r) { return s(x +\
+    \ mod - r.x); }\n   mint& operator*=(const mint& r) { return x = b.mul(x, r.x),\
+    \ *this; }\n   mint& operator/=(const mint& r) { return *this *= r.inv(); }\n\
+    \   friend mint operator+(mint l, mint r) { return l += r; }\n   friend mint operator-(mint\
+    \ l, mint r) { return l -= r; }\n   friend mint operator*(mint l, mint r) { return\
+    \ l *= r; }\n   friend mint operator/(mint l, mint r) { return l /= r; }\n   mint\
+    \ inv() const { return pow(mod - 2); }\n   mint pow(ll b) const {\n      mint\
+    \ a = *this, c = 1;\n      while(b) {\n         if(b & 1) c *= a;\n         a\
+    \ *= a;\n         b >>= 1;\n      }\n      return c;\n   }\n};\nusing vm = vector<mint>;\n"
+  code: "\nusing U = uint64_t;\nstruct Barret {\n   U m, im;\n   Barret(U mod) : m(mod),\
+    \ im(-1ULL / m + 1) {}\n   U mul(U a, U b) const {\n      a *= b;\n      U x =\
+    \ ((__uint128_t)a * im) >> 64;\n      a -= x * m;\n      if((ll)a < 0) a += m;\n\
+    \      return a;\n   }\n};\n\nconstexpr ll mod = 998244353;\nstatic Barret b(mod);\n\
+    struct mint {\n   int x;\n   mint(ll x_ = 0) : x((x_ % mod) + mod) {\n      if(x\
+    \ >= mod) x -= mod;\n   }\n   mint& s(uint xx) { return x = xx < mod ? xx : xx\
+    \ - mod, *this; }\n   mint operator-() { return mint(-x); }\n   mint& operator+=(const\
+    \ mint& r) { return s(x + r.x); }\n   mint& operator-=(const mint& r) { return\
+    \ s(x + mod - r.x); }\n   mint& operator*=(const mint& r) { return x = b.mul(x,\
+    \ r.x), *this; }\n   mint& operator/=(const mint& r) { return *this *= r.inv();\
+    \ }\n   friend mint operator+(mint l, mint r) { return l += r; }\n   friend mint\
+    \ operator-(mint l, mint r) { return l -= r; }\n   friend mint operator*(mint\
+    \ l, mint r) { return l *= r; }\n   friend mint operator/(mint l, mint r) { return\
+    \ l /= r; }\n   mint inv() const { return pow(mod - 2); }\n   mint pow(ll b) const\
+    \ {\n      mint a = *this, c = 1;\n      while(b) {\n         if(b & 1) c *= a;\n\
+    \         a *= a;\n         b >>= 1;\n      }\n      return c;\n   }\n};\nusing\
+    \ vm = vector<mint>;\n"
   dependsOn: []
   isVerificationFile: false
   path: src/modint/BarrettReduction.hpp
   requiredBy: []
-  timestamp: '2024-09-04 17:24:13+09:00'
+  timestamp: '2024-09-04 19:36:22+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/modint/BarrettReduction.test.cpp

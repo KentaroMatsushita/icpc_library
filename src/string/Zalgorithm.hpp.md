@@ -3,30 +3,30 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/string/Zalgorithm.test.cpp
     title: test/string/Zalgorithm.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"src/string/Zalgorithm.hpp\"\n// Z[i] := LCP(s, s[i:])\n\
-    // abacaba -> 7010301\nauto Z(string s) {\n    ll n = sz(s), l = -1, r = -1;\n\
-    \    vector<ll> z(n, n);\n    rep(i, 1, n) {\n        ll &x = z[i] = i < r ? min(r\
-    \ - i, z[i - l]) : 0;\n        while(i + x < n && s[i + x] == s[x]) x++;\n   \
-    \     if(i + x > r) l = i, r = i + x;\n    }\n    return z;\n}\n"
-  code: "// Z[i] := LCP(s, s[i:])\n// abacaba -> 7010301\nauto Z(string s) {\n   \
-    \ ll n = sz(s), l = -1, r = -1;\n    vector<ll> z(n, n);\n    rep(i, 1, n) {\n\
-    \        ll &x = z[i] = i < r ? min(r - i, z[i - l]) : 0;\n        while(i + x\
-    \ < n && s[i + x] == s[x]) x++;\n        if(i + x > r) l = i, r = i + x;\n   \
-    \ }\n    return z;\n}\n"
+  bundledCode: "#line 1 \"src/string/Zalgorithm.hpp\"\ntemplate <typename T> vi z_algorithm(const\
+    \ vector<T> &s) {\n    int n = si(s), l = -1, r = -1;\n    vi z(n, n);\n    rep(i,\
+    \ 1, n) {\n        int &x = z[i] = i < r ? min<ll>(r - i, z[i - l]) : 0;\n   \
+    \     while(i + x < n and s[i + x] == s[x]) x++;\n        if(i + x > r) l = i,\
+    \ r = i + x;\n    }\n    return z;\n}\n"
+  code: "template <typename T> vi z_algorithm(const vector<T> &s) {\n    int n = si(s),\
+    \ l = -1, r = -1;\n    vi z(n, n);\n    rep(i, 1, n) {\n        int &x = z[i]\
+    \ = i < r ? min<ll>(r - i, z[i - l]) : 0;\n        while(i + x < n and s[i + x]\
+    \ == s[x]) x++;\n        if(i + x > r) l = i, r = i + x;\n    }\n    return z;\n\
+    }"
   dependsOn: []
   isVerificationFile: false
   path: src/string/Zalgorithm.hpp
   requiredBy: []
-  timestamp: '2024-08-12 04:22:28+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2024-09-04 19:36:22+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/string/Zalgorithm.test.cpp
 documentation_of: src/string/Zalgorithm.hpp

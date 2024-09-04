@@ -24,19 +24,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/string/KMP.test.cpp
     title: test/string/KMP.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/string/LCP.test.cpp
     title: test/string/LCP.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/string/Manacher.test.cpp
     title: test/string/Manacher.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/string/RollingHash.test.cpp
     title: test/string/RollingHash.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/string/SuffixArray.test.cpp
     title: test/string/SuffixArray.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/string/Zalgorithm.test.cpp
     title: test/string/Zalgorithm.test.cpp
   - icon: ':heavy_check_mark:'
@@ -91,7 +91,7 @@ data:
   isVerificationFile: false
   path: test/template.hpp
   requiredBy: []
-  timestamp: '2024-05-31 19:00:40+09:00'
+  timestamp: '2024-09-04 19:36:22+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/modint/BarrettReduction.test.cpp

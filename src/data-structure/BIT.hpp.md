@@ -11,21 +11,20 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"src/data-structure/BIT.hpp\"\nstruct BIT {\n    vl a;\n\
-    \    BIT(ll n) : a(n + 1) {}\n    void add(ll i, ll x) {\n        i++;\n     \
-    \   while(i < si(a)) a[i] += x, i += i & -i;\n    }\n    ll sum(ll r) {\n    \
-    \    ll s = 0;\n        while(r) s += a[r], r -= r & -r;\n        return s;\n\
-    \    }\n    ll sum(ll l, ll r) { return sum(r) - sum(l); }\n};\n"
-  code: "struct BIT {\n    vl a;\n    BIT(ll n) : a(n + 1) {}\n    void add(ll i,\
-    \ ll x) {\n        i++;\n        while(i < si(a)) a[i] += x, i += i & -i;\n  \
-    \  }\n    ll sum(ll r) {\n        ll s = 0;\n        while(r) s += a[r], r -=\
-    \ r & -r;\n        return s;\n    }\n    ll sum(ll l, ll r) { return sum(r) -\
-    \ sum(l); }\n};"
+  bundledCode: "#line 1 \"src/data-structure/BIT.hpp\"\nstruct BIT {\n   vl a;\n \
+    \  BIT(ll n) : a(n + 1) {}\n   void add(ll i, ll x) {\n      i++;\n      while(i\
+    \ < si(a)) a[i] += x, i += i & -i;\n   }\n   ll sum(ll r) {\n      ll s = 0;\n\
+    \      while(r) s += a[r], r -= r & -r;\n      return s;\n   }\n   ll sum(ll l,\
+    \ ll r) { return sum(r) - sum(l); }\n};\n"
+  code: "struct BIT {\n   vl a;\n   BIT(ll n) : a(n + 1) {}\n   void add(ll i, ll\
+    \ x) {\n      i++;\n      while(i < si(a)) a[i] += x, i += i & -i;\n   }\n   ll\
+    \ sum(ll r) {\n      ll s = 0;\n      while(r) s += a[r], r -= r & -r;\n     \
+    \ return s;\n   }\n   ll sum(ll l, ll r) { return sum(r) - sum(l); }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/data-structure/BIT.hpp
   requiredBy: []
-  timestamp: '2024-09-04 17:24:13+09:00'
+  timestamp: '2024-09-04 19:36:22+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/data-structure/BIT.test.cpp

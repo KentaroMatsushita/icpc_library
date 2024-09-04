@@ -24,9 +24,9 @@ data:
     bool chmin(auto& a, auto b) { return a > b ? a = b, 1 : 0; }\nbool chmax(auto&\
     \ a, auto b) { return a < b ? a = b, 1 : 0; }\n#line 1 \"src/string/KMP.hpp\"\n\
     // kmp[i] := max{ l \u2264 i | s[:l] == s[(i+1)-l:i+1] }\n// abacaba -> 0010123\n\
-    auto KMP(string s) {\n    vector<ll> p(sz(s));\n    rep(i, 1, sz(s)) {\n     \
-    \   ll g = p[i - 1];\n        while(g && s[i] != s[g]) g = p[g - 1];\n       \
-    \ p[i] = g + (s[i] == s[g]);\n    }\n    return p;\n}\n#line 4 \"test/string/KMP.test.cpp\"\
+    auto KMP(string s) {\n   vector<ll> p(sz(s));\n   rep(i, 1, sz(s)) {\n      ll\
+    \ g = p[i - 1];\n      while(g && s[i] != s[g]) g = p[g - 1];\n      p[i] = g\
+    \ + (s[i] == s[g]);\n   }\n   return p;\n}\n#line 4 \"test/string/KMP.test.cpp\"\
     \n\nint main() {\n   cin.tie(0)->sync_with_stdio(0);\n   string S, T;\n   cin\
     \ >> S >> T;\n   auto s = T + '$' + S;\n   auto kmp = KMP(s);\n\n   rep(i, sz(s)\
     \ - sz(S), sz(s)) {\n      if(kmp[i] == sz(T)) cout << i - sz(T) * 2 << '\\n';\n\
@@ -42,7 +42,7 @@ data:
   isVerificationFile: true
   path: test/string/KMP.test.cpp
   requiredBy: []
-  timestamp: '2024-08-12 04:22:28+09:00'
+  timestamp: '2024-09-04 19:36:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/string/KMP.test.cpp

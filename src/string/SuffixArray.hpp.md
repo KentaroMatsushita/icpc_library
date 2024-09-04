@@ -3,21 +3,21 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/string/LCP.test.cpp
     title: test/string/LCP.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/string/SuffixArray.test.cpp
     title: test/string/SuffixArray.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 1 \"src/string/SuffixArray.hpp\"\n// returns pair{sa, lcp}\n\
     // sa \u9577\u3055 n : s[sa[0]:] < s[sa[1]:] < \u2026 < s[sa[n-1]:]\n// lcp \u9577\
     \u3055 n-1 : lcp[i] = LCP(s[sa[i]:], s[sa[i+1]:])\nauto SA(string s) {\n    ll\
-    \ n = sz(s) + 1, lim = 256;\n    // assert(lim > ranges::max(s));\n    vector<ll>\
+    \ n = si(s) + 1, lim = 256;\n    // assert(lim > ranges::max(s));\n    vector<ll>\
     \ sa(n), lcp(n), x(all(s) + 1), y(n), ws(max(n, lim)), rk(n);\n    iota(all(sa),\
     \ 0);\n    for(ll j = 0, p = 0; p < n; j = max(1LL, j * 2), lim = p) {\n     \
     \   p = j;\n        iota(all(y), n - j);\n        rep(i, 0, n) if(sa[i] >= j)\
@@ -32,7 +32,7 @@ data:
     \ pair{sa, lcp};\n}\n"
   code: "// returns pair{sa, lcp}\n// sa \u9577\u3055 n : s[sa[0]:] < s[sa[1]:] <\
     \ \u2026 < s[sa[n-1]:]\n// lcp \u9577\u3055 n-1 : lcp[i] = LCP(s[sa[i]:], s[sa[i+1]:])\n\
-    auto SA(string s) {\n    ll n = sz(s) + 1, lim = 256;\n    // assert(lim > ranges::max(s));\n\
+    auto SA(string s) {\n    ll n = si(s) + 1, lim = 256;\n    // assert(lim > ranges::max(s));\n\
     \    vector<ll> sa(n), lcp(n), x(all(s) + 1), y(n), ws(max(n, lim)), rk(n);\n\
     \    iota(all(sa), 0);\n    for(ll j = 0, p = 0; p < n; j = max(1LL, j * 2), lim\
     \ = p) {\n        p = j;\n        iota(all(y), n - j);\n        rep(i, 0, n) if(sa[i]\
@@ -49,8 +49,8 @@ data:
   isVerificationFile: false
   path: src/string/SuffixArray.hpp
   requiredBy: []
-  timestamp: '2024-08-12 04:22:28+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2024-09-04 19:36:22+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/string/LCP.test.cpp
   - test/string/SuffixArray.test.cpp

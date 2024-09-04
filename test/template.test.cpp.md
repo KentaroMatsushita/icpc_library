@@ -32,7 +32,7 @@ data:
   isVerificationFile: true
   path: test/template.test.cpp
   requiredBy: []
-  timestamp: '2024-05-31 23:58:41+09:00'
+  timestamp: '2024-09-04 19:36:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/template.test.cpp

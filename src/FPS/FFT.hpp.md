@@ -11,41 +11,40 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"src/FPS/FFT.hpp\"\nmint g = 3; // \u539F\u59CB\u6839\nvoid\
-    \ fft(vm &a, bool inv = false) {\n    int n = si(a), s = __lg(n);\n    static\
-    \ vm z, iz;\n    while(si(z) <= s) {\n        z.eb(g.pow(mint(-1).x / (1 << si(z))));\n\
-    \        iz.eb(z.back().inv());\n    }\n    vm b(n);\n    rep(i, 1, s + 1) {\n\
-    \        int w = 1 << s - i;\n        mint base = inv ? iz[i] : z[i], now = 1;\n\
-    \        for(int y = 0; y < n / 2; y += w) {\n            rep(x, w) {\n      \
-    \          auto l = a[y << 1 | x], r = now * a[y << 1 | x | w];\n            \
-    \    b[y | x] = l + r, b[y | x | n >> 1] = l - r;\n            }\n           \
-    \ now *= base;\n        }\n        swap(a, b);\n    }\n}\n\nvm mul(vm a, vm b)\
-    \ {\n    int n = si(a), m = si(b);\n    if(!n or !m) return {};\n    if(min(n,\
-    \ m) <= 30) {\n        vm ans(n + m - 1);\n        rep(i, n) rep(j, m) ans[i +\
-    \ j] += a[i] * b[j];\n        return ans;\n    }\n    int N = n + m - 1;\n   \
-    \ int z = bit_ceil(unsigned(N));\n    a.resize(z), b.resize(z);\n    fft(a), fft(b);\n\
-    \    rep(i, z) a[i] *= b[i];\n    fft(a, true);\n    a.resize(n + m - 1);\n  \
-    \  mint iz = mint(z).inv();\n    fore(e, a) e *= iz;\n    return a;\n}\n"
-  code: "mint g = 3; // \u539F\u59CB\u6839\nvoid fft(vm &a, bool inv = false) {\n\
-    \    int n = si(a), s = __lg(n);\n    static vm z, iz;\n    while(si(z) <= s)\
-    \ {\n        z.eb(g.pow(mint(-1).x / (1 << si(z))));\n        iz.eb(z.back().inv());\n\
-    \    }\n    vm b(n);\n    rep(i, 1, s + 1) {\n        int w = 1 << s - i;\n  \
-    \      mint base = inv ? iz[i] : z[i], now = 1;\n        for(int y = 0; y < n\
-    \ / 2; y += w) {\n            rep(x, w) {\n                auto l = a[y << 1 |\
-    \ x], r = now * a[y << 1 | x | w];\n                b[y | x] = l + r, b[y | x\
-    \ | n >> 1] = l - r;\n            }\n            now *= base;\n        }\n   \
-    \     swap(a, b);\n    }\n}\n\nvm mul(vm a, vm b) {\n    int n = si(a), m = si(b);\n\
-    \    if(!n or !m) return {};\n    if(min(n, m) <= 30) {\n        vm ans(n + m\
-    \ - 1);\n        rep(i, n) rep(j, m) ans[i + j] += a[i] * b[j];\n        return\
-    \ ans;\n    }\n    int N = n + m - 1;\n    int z = bit_ceil(unsigned(N));\n  \
-    \  a.resize(z), b.resize(z);\n    fft(a), fft(b);\n    rep(i, z) a[i] *= b[i];\n\
-    \    fft(a, true);\n    a.resize(n + m - 1);\n    mint iz = mint(z).inv();\n \
-    \   fore(e, a) e *= iz;\n    return a;\n}\n"
+  bundledCode: "#line 1 \"src/FPS/FFT.hpp\"\nmint g = 3;  // \u539F\u59CB\u6839\n\
+    void fft(vm& a, bool inv = false) {\n   int n = si(a), s = __lg(n);\n   static\
+    \ vm z, iz;\n   while(si(z) <= s) {\n      z.eb(g.pow(mint(-1).x / (1 << si(z))));\n\
+    \      iz.eb(z.back().inv());\n   }\n   vm b(n);\n   rep(i, 1, s + 1) {\n    \
+    \  int w = 1 << s - i;\n      mint base = inv ? iz[i] : z[i], now = 1;\n     \
+    \ for(int y = 0; y < n / 2; y += w) {\n         rep(x, w) {\n            auto\
+    \ l = a[y << 1 | x], r = now * a[y << 1 | x | w];\n            b[y | x] = l +\
+    \ r, b[y | x | n >> 1] = l - r;\n         }\n         now *= base;\n      }\n\
+    \      swap(a, b);\n   }\n}\n\nvm mul(vm a, vm b) {\n   int n = si(a), m = si(b);\n\
+    \   if(!n or !m) return {};\n   if(min(n, m) <= 30) {\n      vm ans(n + m - 1);\n\
+    \      rep(i, n) rep(j, m) ans[i + j] += a[i] * b[j];\n      return ans;\n   }\n\
+    \   int N = n + m - 1;\n   int z = bit_ceil(unsigned(N));\n   a.resize(z), b.resize(z);\n\
+    \   fft(a), fft(b);\n   rep(i, z) a[i] *= b[i];\n   fft(a, true);\n   a.resize(n\
+    \ + m - 1);\n   mint iz = mint(z).inv();\n   fore(e, a) e *= iz;\n   return a;\n\
+    }\n"
+  code: "mint g = 3;  // \u539F\u59CB\u6839\nvoid fft(vm& a, bool inv = false) {\n\
+    \   int n = si(a), s = __lg(n);\n   static vm z, iz;\n   while(si(z) <= s) {\n\
+    \      z.eb(g.pow(mint(-1).x / (1 << si(z))));\n      iz.eb(z.back().inv());\n\
+    \   }\n   vm b(n);\n   rep(i, 1, s + 1) {\n      int w = 1 << s - i;\n      mint\
+    \ base = inv ? iz[i] : z[i], now = 1;\n      for(int y = 0; y < n / 2; y += w)\
+    \ {\n         rep(x, w) {\n            auto l = a[y << 1 | x], r = now * a[y <<\
+    \ 1 | x | w];\n            b[y | x] = l + r, b[y | x | n >> 1] = l - r;\n    \
+    \     }\n         now *= base;\n      }\n      swap(a, b);\n   }\n}\n\nvm mul(vm\
+    \ a, vm b) {\n   int n = si(a), m = si(b);\n   if(!n or !m) return {};\n   if(min(n,\
+    \ m) <= 30) {\n      vm ans(n + m - 1);\n      rep(i, n) rep(j, m) ans[i + j]\
+    \ += a[i] * b[j];\n      return ans;\n   }\n   int N = n + m - 1;\n   int z =\
+    \ bit_ceil(unsigned(N));\n   a.resize(z), b.resize(z);\n   fft(a), fft(b);\n \
+    \  rep(i, z) a[i] *= b[i];\n   fft(a, true);\n   a.resize(n + m - 1);\n   mint\
+    \ iz = mint(z).inv();\n   fore(e, a) e *= iz;\n   return a;\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/FPS/FFT.hpp
   requiredBy: []
-  timestamp: '2024-09-04 17:24:13+09:00'
+  timestamp: '2024-09-04 19:36:22+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/FPS/FFT.test.cpp

@@ -12,44 +12,41 @@ data:
   attributes:
     links: []
   bundledCode: "#line 1 \"src/data-structure/FastSet.hpp\"\n\nusing U = uint64_t;\n\
-    const U B = 64;\nstruct FS {\n    U n;\n    vector<vector<U>> a;\n    FS(U n)\
-    \ : n(n) {\n        do a.eb(n = (n + B - 1) / B);\n        while(n > 1);\n   \
-    \ }\n    bool operator[](ll i) const { return a[0][i / B] >> (i % B) & 1; }\n\
-    \    void set(ll i) {\n        for(auto &v : a) {\n            v[i / B] |= 1ULL\
-    \ << (i % B);\n            i /= B;\n        }\n    }\n    void erase(ll i) {\n\
-    \        for(auto &v : a) {\n            v[i / B] &= ~(1ULL << (i % B));\n   \
-    \         if(v[i / B]) break;\n            i /= B;\n        }\n    }\n    ll next(ll\
-    \ i) {\n        rep(h, si(a)) {\n            i++;\n            if(i / B >= si(a[h]))\
-    \ break;\n            U d = a[h][i / B] >> (i % B);\n            if(d) {\n   \
-    \             i += countr_zero(d);\n                while(h--) i = i * B + countr_zero(a[h][i]);\n\
-    \                return i;\n            }\n            i /= B;\n        }\n  \
-    \      return n;\n    }\n    ll prev(ll i) {\n        rep(h, si(a)) {\n      \
-    \      i--;\n            if(i < 0) break;\n            U d = a[h][i / B] << (~i\
-    \ % B);\n            if(d) {\n                i -= countl_zero(d);\n         \
-    \       while(h--) i = i * B + __lg(a[h][i]);\n                return i;\n   \
-    \         }\n            i /= B;\n        }\n        return -1;\n    }\n};\n"
-  code: "\nusing U = uint64_t;\nconst U B = 64;\nstruct FS {\n    U n;\n    vector<vector<U>>\
-    \ a;\n    FS(U n) : n(n) {\n        do a.eb(n = (n + B - 1) / B);\n        while(n\
-    \ > 1);\n    }\n    bool operator[](ll i) const { return a[0][i / B] >> (i % B)\
-    \ & 1; }\n    void set(ll i) {\n        for(auto &v : a) {\n            v[i /\
-    \ B] |= 1ULL << (i % B);\n            i /= B;\n        }\n    }\n    void erase(ll\
-    \ i) {\n        for(auto &v : a) {\n            v[i / B] &= ~(1ULL << (i % B));\n\
-    \            if(v[i / B]) break;\n            i /= B;\n        }\n    }\n    ll\
-    \ next(ll i) {\n        rep(h, si(a)) {\n            i++;\n            if(i /\
-    \ B >= si(a[h])) break;\n            U d = a[h][i / B] >> (i % B);\n         \
-    \   if(d) {\n                i += countr_zero(d);\n                while(h--)\
-    \ i = i * B + countr_zero(a[h][i]);\n                return i;\n            }\n\
-    \            i /= B;\n        }\n        return n;\n    }\n    ll prev(ll i) {\n\
-    \        rep(h, si(a)) {\n            i--;\n            if(i < 0) break;\n   \
-    \         U d = a[h][i / B] << (~i % B);\n            if(d) {\n              \
-    \  i -= countl_zero(d);\n                while(h--) i = i * B + __lg(a[h][i]);\n\
-    \                return i;\n            }\n            i /= B;\n        }\n  \
-    \      return -1;\n    }\n};"
+    const U B = 64;\nstruct FS {\n   U n;\n   vector<vector<U>> a;\n   FS(U n) : n(n)\
+    \ {\n      do a.eb(n = (n + B - 1) / B);\n      while(n > 1);\n   }\n   bool operator[](ll\
+    \ i) const { return a[0][i / B] >> (i % B) & 1; }\n   void set(ll i) {\n     \
+    \ for(auto& v : a) {\n         v[i / B] |= 1ULL << (i % B);\n         i /= B;\n\
+    \      }\n   }\n   void erase(ll i) {\n      for(auto& v : a) {\n         v[i\
+    \ / B] &= ~(1ULL << (i % B));\n         if(v[i / B]) break;\n         i /= B;\n\
+    \      }\n   }\n   ll next(ll i) {\n      rep(h, si(a)) {\n         i++;\n   \
+    \      if(i / B >= si(a[h])) break;\n         U d = a[h][i / B] >> (i % B);\n\
+    \         if(d) {\n            i += countr_zero(d);\n            while(h--) i\
+    \ = i * B + countr_zero(a[h][i]);\n            return i;\n         }\n       \
+    \  i /= B;\n      }\n      return n;\n   }\n   ll prev(ll i) {\n      rep(h, si(a))\
+    \ {\n         i--;\n         if(i < 0) break;\n         U d = a[h][i / B] << (~i\
+    \ % B);\n         if(d) {\n            i -= countl_zero(d);\n            while(h--)\
+    \ i = i * B + __lg(a[h][i]);\n            return i;\n         }\n         i /=\
+    \ B;\n      }\n      return -1;\n   }\n};\n"
+  code: "\nusing U = uint64_t;\nconst U B = 64;\nstruct FS {\n   U n;\n   vector<vector<U>>\
+    \ a;\n   FS(U n) : n(n) {\n      do a.eb(n = (n + B - 1) / B);\n      while(n\
+    \ > 1);\n   }\n   bool operator[](ll i) const { return a[0][i / B] >> (i % B)\
+    \ & 1; }\n   void set(ll i) {\n      for(auto& v : a) {\n         v[i / B] |=\
+    \ 1ULL << (i % B);\n         i /= B;\n      }\n   }\n   void erase(ll i) {\n \
+    \     for(auto& v : a) {\n         v[i / B] &= ~(1ULL << (i % B));\n         if(v[i\
+    \ / B]) break;\n         i /= B;\n      }\n   }\n   ll next(ll i) {\n      rep(h,\
+    \ si(a)) {\n         i++;\n         if(i / B >= si(a[h])) break;\n         U d\
+    \ = a[h][i / B] >> (i % B);\n         if(d) {\n            i += countr_zero(d);\n\
+    \            while(h--) i = i * B + countr_zero(a[h][i]);\n            return\
+    \ i;\n         }\n         i /= B;\n      }\n      return n;\n   }\n   ll prev(ll\
+    \ i) {\n      rep(h, si(a)) {\n         i--;\n         if(i < 0) break;\n    \
+    \     U d = a[h][i / B] << (~i % B);\n         if(d) {\n            i -= countl_zero(d);\n\
+    \            while(h--) i = i * B + __lg(a[h][i]);\n            return i;\n  \
+    \       }\n         i /= B;\n      }\n      return -1;\n   }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/data-structure/FastSet.hpp
   requiredBy: []
-  timestamp: '2024-09-04 17:24:13+09:00'
+  timestamp: '2024-09-04 19:36:22+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/data-structure/FastSet.test.cpp

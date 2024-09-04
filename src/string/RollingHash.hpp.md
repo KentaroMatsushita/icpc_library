@@ -3,38 +3,41 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/string/RollingHash.test.cpp
     title: test/string/RollingHash.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"src/string/RollingHash.hpp\"\n// using u64 = uint64_t;\n\
-    const u64 mod = INF;\nu64 add(u64 a, u64 b) {\n    a += b;\n    if(a >= mod) a\
-    \ -= mod;\n    return a;\n}\nu64 mul(u64 a, u64 b) {\n    auto c = (__uint128_t)a\
-    \ * b;\n    return add(c >> 61, c & mod);\n}\nrandom_device rnd;\nconst u64 r\
-    \ = ((u64)rnd() << 32 | rnd()) % mod;\nstruct RH {\n    ll n;\n    vector<u64>\
-    \ hs, pw;\n    RH(string s) : n(sz(s)), hs(n + 1), pw(n + 1, 1) {\n        rep(i,\
-    \ 0, n) {\n            pw[i + 1] = mul(pw[i], r);\n            hs[i + 1] = add(mul(hs[i],\
-    \ r), s[i]);\n        }\n    }\n    u64 get(ll l, ll r) const { return add(hs[r],\
-    \ mod - mul(hs[l], pw[r - l])); }\n};\n"
-  code: "// using u64 = uint64_t;\nconst u64 mod = INF;\nu64 add(u64 a, u64 b) {\n\
-    \    a += b;\n    if(a >= mod) a -= mod;\n    return a;\n}\nu64 mul(u64 a, u64\
-    \ b) {\n    auto c = (__uint128_t)a * b;\n    return add(c >> 61, c & mod);\n\
-    }\nrandom_device rnd;\nconst u64 r = ((u64)rnd() << 32 | rnd()) % mod;\nstruct\
-    \ RH {\n    ll n;\n    vector<u64> hs, pw;\n    RH(string s) : n(sz(s)), hs(n\
-    \ + 1), pw(n + 1, 1) {\n        rep(i, 0, n) {\n            pw[i + 1] = mul(pw[i],\
-    \ r);\n            hs[i + 1] = add(mul(hs[i], r), s[i]);\n        }\n    }\n \
-    \   u64 get(ll l, ll r) const { return add(hs[r], mod - mul(hs[l], pw[r - l]));\
-    \ }\n};\n"
+  bundledCode: "#line 1 \"src/string/RollingHash.hpp\"\nconst ll mod = (1LL << 61)\
+    \ - 1;\nll add(ll a, ll b) { return (a += b) >= mod ? a - mod : a; }\nll mul(ll\
+    \ a, ll b) {\n    i128 c = (i128)a * b;\n    return add(c >> 61, c & mod);\n}\n\
+    ll r = 7954398468495;\nstruct RH {\n    ll n;\n    vl hs, pw;\n    RH(string s)\
+    \ : n(si(s)), hs(n + 1), pw(n + 1, 1) {\n        rep(i, n) {\n            pw[i\
+    \ + 1] = mul(pw[i], r);\n            hs[i + 1] = add(mul(hs[i], r), s[i]);\n \
+    \       }\n    }\n    ll get(ll l, ll r) const { return add(hs[r], mod - mul(hs[l],\
+    \ pw[r - l])); }\n    int lcp(int i, int j) {\n        int ok = 0, ng = min(n\
+    \ - i, n - j) + 1;\n        while(ok < ng - 1) {\n            int mid = ok + ng\
+    \ >> 1;\n            (get(i, i + mid) == get(j, j + mid) ? ok : ng) = mid;\n \
+    \       }\n        return ok;\n    }\n};\n"
+  code: "const ll mod = (1LL << 61) - 1;\nll add(ll a, ll b) { return (a += b) >=\
+    \ mod ? a - mod : a; }\nll mul(ll a, ll b) {\n    i128 c = (i128)a * b;\n    return\
+    \ add(c >> 61, c & mod);\n}\nll r = 7954398468495;\nstruct RH {\n    ll n;\n \
+    \   vl hs, pw;\n    RH(string s) : n(si(s)), hs(n + 1), pw(n + 1, 1) {\n     \
+    \   rep(i, n) {\n            pw[i + 1] = mul(pw[i], r);\n            hs[i + 1]\
+    \ = add(mul(hs[i], r), s[i]);\n        }\n    }\n    ll get(ll l, ll r) const\
+    \ { return add(hs[r], mod - mul(hs[l], pw[r - l])); }\n    int lcp(int i, int\
+    \ j) {\n        int ok = 0, ng = min(n - i, n - j) + 1;\n        while(ok < ng\
+    \ - 1) {\n            int mid = ok + ng >> 1;\n            (get(i, i + mid) ==\
+    \ get(j, j + mid) ? ok : ng) = mid;\n        }\n        return ok;\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: src/string/RollingHash.hpp
   requiredBy: []
-  timestamp: '2024-08-12 04:22:28+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2024-09-04 19:36:22+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/string/RollingHash.test.cpp
 documentation_of: src/string/RollingHash.hpp

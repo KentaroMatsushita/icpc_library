@@ -58,8 +58,8 @@ data:
       path: src/data-structure/segtree.hpp
       title: src/data-structure/segtree.hpp
     - icon: ':warning:'
-      path: src/data-structure/sparse-table(disjoint).hpp
-      title: src/data-structure/sparse-table(disjoint).hpp
+      path: src/data-structure/sparse-table-disjoint.hpp
+      title: src/data-structure/sparse-table-disjoint.hpp
     - icon: ':warning:'
       path: src/data-structure/swag.hpp
       title: src/data-structure/swag.hpp
@@ -174,23 +174,26 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/string/Manacher.hpp
       title: Manacher's algorithm
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/string/RollingHash.hpp
       title: Rolling Hash
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/string/SuffixArray.hpp
       title: Suffix Array
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/string/Zalgorithm.hpp
       title: Z Algorithm
+    - icon: ':warning:'
+      path: src/string/enumerate-runs.hpp
+      title: src/string/enumerate-runs.hpp
   - name: src/template
     pages:
     - icon: ':warning:'
+      path: src/template/0template.hpp
+      title: src/template/0template.hpp
+    - icon: ':warning:'
       path: src/template/rnd.hpp
       title: src/template/rnd.hpp
-    - icon: ':warning:'
-      path: src/template/template.hpp
-      title: src/template/template.hpp
   - name: src/tree
     pages:
     - icon: ':warning:'
@@ -239,19 +242,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/string/KMP.test.cpp
       title: test/string/KMP.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/string/LCP.test.cpp
       title: test/string/LCP.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/string/Manacher.test.cpp
       title: test/string/Manacher.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/string/RollingHash.test.cpp
       title: test/string/RollingHash.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/string/SuffixArray.test.cpp
       title: test/string/SuffixArray.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/string/Zalgorithm.test.cpp
       title: test/string/Zalgorithm.test.cpp
   - name: test

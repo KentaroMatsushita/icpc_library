@@ -62,7 +62,7 @@ data:
   isVerificationFile: true
   path: test/modint/modint.test.cpp
   requiredBy: []
-  timestamp: '2024-09-04 17:24:13+09:00'
+  timestamp: '2024-09-04 19:36:22+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/modint/modint.test.cpp

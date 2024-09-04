@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/string/SuffixArray.hpp
     title: Suffix Array
   - icon: ':question:'
@@ -9,9 +9,9 @@ data:
     title: test/template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/suffixarray
@@ -25,7 +25,7 @@ data:
     \ a, auto b) { return a < b ? a = b, 1 : 0; }\n#line 1 \"src/string/SuffixArray.hpp\"\
     \n// returns pair{sa, lcp}\n// sa \u9577\u3055 n : s[sa[0]:] < s[sa[1]:] < \u2026\
     \ < s[sa[n-1]:]\n// lcp \u9577\u3055 n-1 : lcp[i] = LCP(s[sa[i]:], s[sa[i+1]:])\n\
-    auto SA(string s) {\n    ll n = sz(s) + 1, lim = 256;\n    // assert(lim > ranges::max(s));\n\
+    auto SA(string s) {\n    ll n = si(s) + 1, lim = 256;\n    // assert(lim > ranges::max(s));\n\
     \    vector<ll> sa(n), lcp(n), x(all(s) + 1), y(n), ws(max(n, lim)), rk(n);\n\
     \    iota(all(sa), 0);\n    for(ll j = 0, p = 0; p < n; j = max(1LL, j * 2), lim\
     \ = p) {\n        p = j;\n        iota(all(y), n - j);\n        rep(i, 0, n) if(sa[i]\
@@ -52,8 +52,8 @@ data:
   isVerificationFile: true
   path: test/string/SuffixArray.test.cpp
   requiredBy: []
-  timestamp: '2024-08-12 04:22:28+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-09-04 19:36:22+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/string/SuffixArray.test.cpp
 layout: document
