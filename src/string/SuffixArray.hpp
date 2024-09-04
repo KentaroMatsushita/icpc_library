@@ -2,7 +2,7 @@
 // sa 長さ n : s[sa[0]:] < s[sa[1]:] < … < s[sa[n-1]:]
 // lcp 長さ n-1 : lcp[i] = LCP(s[sa[i]:], s[sa[i+1]:])
 auto SA(string s) {
-    ll n = sz(s) + 1, lim = 256;
+    ll n = si(s) + 1, lim = 256;
     // assert(lim > ranges::max(s));
     vector<ll> sa(n), lcp(n), x(all(s) + 1), y(n), ws(max(n, lim)), rk(n);
     iota(all(sa), 0);
