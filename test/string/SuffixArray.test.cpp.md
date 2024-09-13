@@ -25,22 +25,21 @@ data:
     \ a, auto b) { return a < b ? a = b, 1 : 0; }\n#line 1 \"src/string/SuffixArray.hpp\"\
     \n// returns pair{sa, lcp}\n// sa \u9577\u3055 n : s[sa[0]:] < s[sa[1]:] < \u2026\
     \ < s[sa[n-1]:]\n// lcp \u9577\u3055 n-1 : lcp[i] = LCP(s[sa[i]:], s[sa[i+1]:])\n\
-    auto SA(string s) {\n    ll n = si(s) + 1, lim = 256;\n    // assert(lim > ranges::max(s));\n\
-    \    vector<ll> sa(n), lcp(n), x(all(s) + 1), y(n), ws(max(n, lim)), rk(n);\n\
-    \    iota(all(sa), 0);\n    for(ll j = 0, p = 0; p < n; j = max(1LL, j * 2), lim\
-    \ = p) {\n        p = j;\n        iota(all(y), n - j);\n        rep(i, 0, n) if(sa[i]\
-    \ >= j) y[p++] = sa[i] - j;\n        fill(all(ws), 0);\n        rep(i, 0, n) ws[x[i]]++;\n\
-    \        rep(i, 1, lim) ws[i] += ws[i - 1];\n        for(ll i = n; i--;) sa[--ws[x[y[i]]]]\
-    \ = y[i];\n        swap(x, y);\n        p = 1;\n        x[sa[0]] = 0;\n      \
-    \  rep(i, 1, n) {\n            ll a = sa[i - 1], b = sa[i];\n            x[b]\
-    \ = (y[a] == y[b] && y[a + j] == y[b + j]) ? p - 1 : p++;\n        }\n    }\n\
-    \    rep(i, 1, n) rk[sa[i]] = i;\n    for(ll i = 0, k = 0; i < n - 1; lcp[rk[i++]]\
-    \ = k) {\n        if(k) k--;\n        while(s[i + k] == s[sa[rk[i] - 1] + k])\
-    \ k++;\n    }\n    sa.erase(begin(sa));\n    lcp.erase(begin(lcp));\n    return\
-    \ pair{sa, lcp};\n}\n#line 4 \"test/string/SuffixArray.test.cpp\"\n\nint main()\
-    \ {\n   cin.tie(0)->sync_with_stdio(0);\n   string S;\n   cin >> S;\n   const\
-    \ ll N = sz(S);\n   auto [sa, lcp] = SA(S);\n   rep(i, 0, N) cout << sa[i] <<\
-    \ \" \\n\"[i + 1 == N];\n}\n"
+    auto SA(string s) {\n   ll n = si(s) + 1, lim = 256;\n   // assert(lim > ranges::max(s));\n\
+    \   vector<ll> sa(n), lcp(n), x(all(s) + 1), y(n), ws(max(n, lim)), rk(n);\n \
+    \  iota(all(sa), 0);\n   for(ll j = 0, p = 0; p < n; j = max(1LL, j * 2), lim\
+    \ = p) {\n      p = j;\n      iota(all(y), n - j);\n      rep(i, 0, n) if(sa[i]\
+    \ >= j) y[p++] = sa[i] - j;\n      fill(all(ws), 0);\n      rep(i, 0, n) ws[x[i]]++;\n\
+    \      rep(i, 1, lim) ws[i] += ws[i - 1];\n      for(ll i = n; i--;) sa[--ws[x[y[i]]]]\
+    \ = y[i];\n      swap(x, y);\n      p = 1;\n      x[sa[0]] = 0;\n      rep(i,\
+    \ 1, n) {\n         ll a = sa[i - 1], b = sa[i];\n         x[b] = (y[a] == y[b]\
+    \ && y[a + j] == y[b + j]) ? p - 1 : p++;\n      }\n   }\n   rep(i, 1, n) rk[sa[i]]\
+    \ = i;\n   for(ll i = 0, k = 0; i < n - 1; lcp[rk[i++]] = k) {\n      if(k) k--;\n\
+    \      while(s[i + k] == s[sa[rk[i] - 1] + k]) k++;\n   }\n   sa.erase(begin(sa));\n\
+    \   lcp.erase(begin(lcp));\n   return pair{sa, lcp};\n}\n#line 4 \"test/string/SuffixArray.test.cpp\"\
+    \n\nint main() {\n   cin.tie(0)->sync_with_stdio(0);\n   string S;\n   cin >>\
+    \ S;\n   const ll N = sz(S);\n   auto [sa, lcp] = SA(S);\n   rep(i, 0, N) cout\
+    \ << sa[i] << \" \\n\"[i + 1 == N];\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/suffixarray\"\n#include\
     \ \"test/template.hpp\"\n#include \"src/string/SuffixArray.hpp\"\n\nint main()\
     \ {\n   cin.tie(0)->sync_with_stdio(0);\n   string S;\n   cin >> S;\n   const\
@@ -52,7 +51,7 @@ data:
   isVerificationFile: true
   path: test/string/SuffixArray.test.cpp
   requiredBy: []
-  timestamp: '2024-09-04 19:36:22+09:00'
+  timestamp: '2024-09-13 21:17:34+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/string/SuffixArray.test.cpp

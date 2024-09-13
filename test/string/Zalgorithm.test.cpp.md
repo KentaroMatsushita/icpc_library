@@ -23,11 +23,11 @@ data:
     \ i = a; i < (b); i++)\n#define all(a) begin(a), end(a)\n#define sz(a) ssize(a)\n\
     bool chmin(auto& a, auto b) { return a > b ? a = b, 1 : 0; }\nbool chmax(auto&\
     \ a, auto b) { return a < b ? a = b, 1 : 0; }\n#line 1 \"src/string/Zalgorithm.hpp\"\
-    \ntemplate <typename T> vi z_algorithm(const vector<T> &s) {\n    int n = si(s),\
-    \ l = -1, r = -1;\n    vi z(n, n);\n    rep(i, 1, n) {\n        int &x = z[i]\
-    \ = i < r ? min<ll>(r - i, z[i - l]) : 0;\n        while(i + x < n and s[i + x]\
-    \ == s[x]) x++;\n        if(i + x > r) l = i, r = i + x;\n    }\n    return z;\n\
-    }\n#line 4 \"test/string/Zalgorithm.test.cpp\"\n\nint main() {\n   cin.tie(0)->sync_with_stdio(0);\n\
+    \ntemplate<typename T> vi z_algorithm(const vector<T>& s) {\n   int n = si(s),\
+    \ l = -1, r = -1;\n   vi z(n, n);\n   rep(i, 1, n) {\n      int& x = z[i] = i\
+    \ < r ? min<ll>(r - i, z[i - l]) : 0;\n      while(i + x < n and s[i + x] == s[x])\
+    \ x++;\n      if(i + x > r) l = i, r = i + x;\n   }\n   return z;\n}\n#line 4\
+    \ \"test/string/Zalgorithm.test.cpp\"\n\nint main() {\n   cin.tie(0)->sync_with_stdio(0);\n\
     \   string S;\n   cin >> S;\n   auto z = Z(S);\n   rep(i, 0, sz(S)) cout << z[i]\
     \ << \" \\n\"[i + 1 == sz(S)];\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\n#include\
@@ -40,7 +40,7 @@ data:
   isVerificationFile: true
   path: test/string/Zalgorithm.test.cpp
   requiredBy: []
-  timestamp: '2024-09-04 19:36:22+09:00'
+  timestamp: '2024-09-13 21:17:34+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/string/Zalgorithm.test.cpp

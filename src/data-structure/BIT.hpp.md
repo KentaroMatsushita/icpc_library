@@ -15,16 +15,24 @@ data:
     \  BIT(ll n) : a(n + 1) {}\n   void add(ll i, ll x) {\n      i++;\n      while(i\
     \ < si(a)) a[i] += x, i += i & -i;\n   }\n   ll sum(ll r) {\n      ll s = 0;\n\
     \      while(r) s += a[r], r -= r & -r;\n      return s;\n   }\n   ll sum(ll l,\
-    \ ll r) { return sum(r) - sum(l); }\n};\n"
+    \ ll r) { return sum(r) - sum(l); }\n   // minimize i s.t. sum(i) >= w\n   int\
+    \ lower_bound(ll w) {\n      if(w <= 0) return 0;\n      int x = 0, N = si(a)\
+    \ + 1;\n      for(int k = 1 << __lg(N); k; k >>= 1) {\n         if(x + k <= N\
+    \ - 1 && a[x + k] < w) {\n            w -= a[x + k];\n            x += k;\n  \
+    \       }\n      }\n      return x;\n   }\n};\n"
   code: "struct BIT {\n   vl a;\n   BIT(ll n) : a(n + 1) {}\n   void add(ll i, ll\
     \ x) {\n      i++;\n      while(i < si(a)) a[i] += x, i += i & -i;\n   }\n   ll\
     \ sum(ll r) {\n      ll s = 0;\n      while(r) s += a[r], r -= r & -r;\n     \
-    \ return s;\n   }\n   ll sum(ll l, ll r) { return sum(r) - sum(l); }\n};"
+    \ return s;\n   }\n   ll sum(ll l, ll r) { return sum(r) - sum(l); }\n   // minimize\
+    \ i s.t. sum(i) >= w\n   int lower_bound(ll w) {\n      if(w <= 0) return 0;\n\
+    \      int x = 0, N = si(a) + 1;\n      for(int k = 1 << __lg(N); k; k >>= 1)\
+    \ {\n         if(x + k <= N - 1 && a[x + k] < w) {\n            w -= a[x + k];\n\
+    \            x += k;\n         }\n      }\n      return x;\n   }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/data-structure/BIT.hpp
   requiredBy: []
-  timestamp: '2024-09-04 19:36:22+09:00'
+  timestamp: '2024-09-13 21:17:34+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/data-structure/BIT.test.cpp

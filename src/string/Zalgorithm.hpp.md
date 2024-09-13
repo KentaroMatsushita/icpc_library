@@ -11,21 +11,20 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"src/string/Zalgorithm.hpp\"\ntemplate <typename T> vi z_algorithm(const\
-    \ vector<T> &s) {\n    int n = si(s), l = -1, r = -1;\n    vi z(n, n);\n    rep(i,\
-    \ 1, n) {\n        int &x = z[i] = i < r ? min<ll>(r - i, z[i - l]) : 0;\n   \
-    \     while(i + x < n and s[i + x] == s[x]) x++;\n        if(i + x > r) l = i,\
-    \ r = i + x;\n    }\n    return z;\n}\n"
-  code: "template <typename T> vi z_algorithm(const vector<T> &s) {\n    int n = si(s),\
-    \ l = -1, r = -1;\n    vi z(n, n);\n    rep(i, 1, n) {\n        int &x = z[i]\
-    \ = i < r ? min<ll>(r - i, z[i - l]) : 0;\n        while(i + x < n and s[i + x]\
-    \ == s[x]) x++;\n        if(i + x > r) l = i, r = i + x;\n    }\n    return z;\n\
-    }"
+  bundledCode: "#line 1 \"src/string/Zalgorithm.hpp\"\ntemplate<typename T> vi z_algorithm(const\
+    \ vector<T>& s) {\n   int n = si(s), l = -1, r = -1;\n   vi z(n, n);\n   rep(i,\
+    \ 1, n) {\n      int& x = z[i] = i < r ? min<ll>(r - i, z[i - l]) : 0;\n     \
+    \ while(i + x < n and s[i + x] == s[x]) x++;\n      if(i + x > r) l = i, r = i\
+    \ + x;\n   }\n   return z;\n}\n"
+  code: "template<typename T> vi z_algorithm(const vector<T>& s) {\n   int n = si(s),\
+    \ l = -1, r = -1;\n   vi z(n, n);\n   rep(i, 1, n) {\n      int& x = z[i] = i\
+    \ < r ? min<ll>(r - i, z[i - l]) : 0;\n      while(i + x < n and s[i + x] == s[x])\
+    \ x++;\n      if(i + x > r) l = i, r = i + x;\n   }\n   return z;\n}"
   dependsOn: []
   isVerificationFile: false
   path: src/string/Zalgorithm.hpp
   requiredBy: []
-  timestamp: '2024-09-04 19:36:22+09:00'
+  timestamp: '2024-09-13 21:17:34+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/string/Zalgorithm.test.cpp

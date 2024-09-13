@@ -13,11 +13,11 @@ data:
     - icon: ':warning:'
       path: src/FPS/poly.hpp
       title: src/FPS/poly.hpp
+    - icon: ':warning:'
+      path: src/FPS/relaxed-convolution.hpp
+      title: src/FPS/relaxed-convolution.hpp
   - name: src/data-structure
     pages:
-    - icon: ':warning:'
-      path: src/data-structure/2d-segtree.hpp
-      title: src/data-structure/2d-segtree.hpp
     - icon: ':x:'
       path: src/data-structure/BIT.hpp
       title: BIT (Fenwick Tree)
@@ -54,6 +54,9 @@ data:
     - icon: ':warning:'
       path: src/data-structure/segbeats.hpp
       title: src/data-structure/segbeats.hpp
+    - icon: ':warning:'
+      path: src/data-structure/segtree-2d.hpp
+      title: src/data-structure/segtree-2d.hpp
     - icon: ':warning:'
       path: src/data-structure/segtree.hpp
       title: src/data-structure/segtree.hpp
@@ -92,6 +95,9 @@ data:
       path: src/flow/flow.hpp
       title: src/flow/flow.hpp
     - icon: ':warning:'
+      path: src/flow/lower-upper-bound-flow.hpp
+      title: src/flow/lower-upper-bound-flow.hpp
+    - icon: ':warning:'
       path: src/flow/mcf.hpp
       title: src/flow/mcf.hpp
   - name: src/geometry
@@ -102,6 +108,12 @@ data:
     - icon: ':warning:'
       path: src/geometry/circle.hpp
       title: src/geometry/circle.hpp
+    - icon: ':warning:'
+      path: src/geometry/convex-hull.hpp
+      title: src/geometry/convex-hull.hpp
+    - icon: ':warning:'
+      path: src/geometry/funcs.hpp
+      title: src/geometry/funcs.hpp
     - icon: ':warning:'
       path: src/geometry/line.hpp
       title: src/geometry/line.hpp
@@ -138,6 +150,9 @@ data:
       path: src/math/and-or-convolution.hpp
       title: src/math/and-or-convolution.hpp
     - icon: ':warning:'
+      path: src/math/binom.hpp
+      title: src/math/binom.hpp
+    - icon: ':warning:'
       path: src/math/crt.hpp
       title: src/math/crt.hpp
     - icon: ':warning:'
@@ -158,6 +173,14 @@ data:
     - icon: ':warning:'
       path: src/math/xor-convolution.hpp
       title: src/math/xor-convolution.hpp
+  - name: src/misc
+    pages:
+    - icon: ':warning:'
+      path: src/misc/clock.hpp
+      title: src/misc/clock.hpp
+    - icon: ':warning:'
+      path: src/misc/simplex.hpp
+      title: src/misc/simplex.hpp
   - name: src/modint
     pages:
     - icon: ':x:'
@@ -189,13 +212,16 @@ data:
   - name: src/template
     pages:
     - icon: ':warning:'
-      path: src/template/0template.hpp
-      title: src/template/0template.hpp
+      path: src/template/1template.hpp
+      title: src/template/1template.hpp
     - icon: ':warning:'
       path: src/template/rnd.hpp
       title: src/template/rnd.hpp
   - name: src/tree
     pages:
+    - icon: ':warning:'
+      path: src/tree/block-cut-tree.hpp
+      title: src/tree/block-cut-tree.hpp
     - icon: ':warning:'
       path: src/tree/hld.hpp
       title: src/tree/hld.hpp
