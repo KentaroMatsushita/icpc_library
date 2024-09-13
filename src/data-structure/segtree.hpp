@@ -1,8 +1,8 @@
 template<class S, S (*op)(S, S), S (*e)()> struct segtree {
-   segtree(int n) : segtree(vector<S>(n)) {}
+   segtree(int n) : segtree(vector<S>(n, e())) {}
    segtree(const vector<S>& v) : n(si(v)) {
-      s = bit_ceil(uint(n));
-      log = countr_zero(uint(s));
+      s = bit_ceil(unsigned(n));
+      log = countr_zero(unsigned(s));
       d = vector<S>(2 * s, e());
       rep(i, n) d[s + i] = v[i];
       per(i, s, 1) update(i);

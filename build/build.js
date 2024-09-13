@@ -6,7 +6,7 @@ const num_columns = 2;          // 何段組みか
 const break_after_toc = "column"; // toc の後に : page (改ページする) / column (改段する) / auto (強制しない)
 const section_order = ["template", //
     "data-structure", "dp", "math","graph", //
-     "modint", "FPS", "tree", "flow", "string","geometry", "memo"];   // src/* のフォルダを読み出す順序
+     "modint", "FPS", "tree", "flow", "string","geometry","misc", "memo"];   // src/* のフォルダを読み出す順序
 
 
 

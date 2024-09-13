@@ -1,5 +1,5 @@
 ll rnd(ll l, ll r) {  //[l, r)
-   static mt19937_64 gen(time(NULL));
+   static mt19937_64 gen(chrono::steady_clock::now().time_since_epoch().count());
    return uniform_int_distribution<ll>(l, r - 1)(gen);
 }
 template<typename T> void rndshuf(vector<T>& v) { rep(i, 1, si(v)) swap(v[i], v[rnd(0, i)]); }

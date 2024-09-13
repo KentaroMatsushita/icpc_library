@@ -1,62 +1,73 @@
-// struct E {
-//     int to, rev, cap;
-// };
-// vector<vector<E>> g(n);
-// auto add_edge = [&](int u, int v, int c) {
-//     g[u].push_back(E{v, si(g[v]), c});
-//     g[v].push_back(E{u, si(g[u]) - 1, 0});
-// };
+template<typename T> struct Dinic {
+   const T INF;
 
-template<class C> struct MaxFlow {
-   C flow;
-   vector<char> dual;
-   // false: S-side true: T-side
-};
-template<class C, class E> struct MFExec {
-   vector<vector<E>>& g;
-   int s, t;
-   vi level, iter;
-   C dfs(int v, C f) {
-      if(v == t) return f;
-      C res = 0;
-      for(int& i = iter[v]; i < si(g[v]); i++) {
-         E& e = g[v][i];
-         if(!e.cap || level[v] >= level[e.to]) continue;
-         C d = dfs(e.to, min(f, e.cap));
-         e.cap -= d;
-         g[e.to][e.rev].cap += d;
-         res += d, f -= d;
-         if(!f) break;
-      }
-      return res;
+   struct edge {
+      int to;
+      T cap;
+      int rev;
+      bool isrev;
+      int idx;
+   };
+
+   vector<vector<edge>> g;
+   vector<int> c, iter;
+   Dinic(int V) : INF(numeric_limits<T>::max()), g(V) {}
+   void add_edge(int from, int to, T cap, int idx = -1) {
+      g[from].emplace_back((edge){to, cap, si(g[to]), false, idx});
+      g[to].emplace_back((edge){from, 0, si(g[from]) - 1, true, idx});
    }
-   MaxFlow<C> info;
-   MFExec(vector<vector<E>>& g, int s, int t) : g(g), s(s), t(t) {
-      int n = si(g);
-      C& flow = (info.flow = 0);
-      while(true) {
-         queue<int> q;
-         level = vi(n, -1);
-         level[s] = 0;
-         q.push(s);
-         while(!q.empty()) {
-            int v = q.front();
-            q.pop();
-            fore(e, g[v]) {
-               if(!e.cap or level[e.to] >= 0) continue;
-               level[e.to] = level[v] + 1;
-               q.emplace(e.to);
+
+   bool bfs(int s, int t) {
+      c.assign(si(g), -1);
+      queue<int> q;
+      c[s] = 0;
+      q.push(s);
+      while(!q.empty() && c[t] == -1) {
+         int x = q.front();
+         q.pop();
+         fore(e, g[x]) {
+            if(e.cap > 0 && c[e.to] == -1) {
+               c[e.to] = c[x] + 1;
+               q.push(e.to);
             }
          }
-         if(level[t] == -1) break;
-         iter = vi(n, 0);
-         while(true) {
-            C f = dfs(s, INF);
-            if(!f) break;
-            flow += f;
+      }
+      return c[t] != -1;
+   }
+
+   T dfs(int x, int t, T flow) {
+      if(x == t) return flow;
+      for(int& i = iter[x]; i < si(g[x]); i++) {
+         edge& e = g[x][i];
+         if(e.cap > 0 && c[x] < c[e.to]) {
+            T d = dfs(e.to, t, min(flow, e.cap));
+            if(d > 0) {
+               e.cap -= d;
+               g[e.to][e.rev].cap += d;
+               return d;
+            }
          }
       }
-      rep(i, n) info.dual.eb(level[i] == -1);
+      return 0;
    }
+
+   T max_flow(int s, int t) {
+      T flow = 0;
+      while(bfs(s, t)) {
+         iter.assign(si(g), 0);
+         T f = 0;
+         while((f = dfs(s, t, INF)) > 0) flow += f;
+      }
+      return flow;
+   }
+
+   // void output() {
+   //     for(int i = 0; i < g.size(); i++) {
+   //         for(auto &e : g[i]) {
+   //             if(e.isrev) continue;
+   //             auto &rev_e = g[e.to][e.rev];
+   //             cout << i << "->" << e.to << " (flow: " << rev_e.cap << "/" << e.cap + rev_e.cap << ")" << endl;
+   //         }
+   //     }
+   // }
 };
-template<class C, class E> MaxFlow<C> get_mf(vector<vector<E>>& g, int s, int t) { return MFExec<C, E>(g, s, t).info; }
