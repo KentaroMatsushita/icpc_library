@@ -16,9 +16,9 @@ data:
     links: []
   bundledCode: "#line 1 \"src/modint/modint.hpp\"\nconstexpr int mod = 998244353;\n\
     struct mint {\n   int x;\n   mint(ll x_ = 0) : x(x_ % mod) {\n      if(x < 0)\
-    \ x == mod;\n   }\n   mint operator-() {\n      auto res = *this;\n      res.x\
+    \ x += mod;\n   }\n   mint operator-() {\n      auto res = *this;\n      res.x\
     \ = (x ? mod - x : 0);\n      return res;\n   }\n   mint& operator+=(mint r) {\n\
-    \      if((x += r.x) >= mod) x -= r.x;\n      return *this;\n   }\n   mint& operator-=(mint\
+    \      if((x += r.x) >= mod) x -= mod;\n      return *this;\n   }\n   mint& operator-=(mint\
     \ r) {\n      if((x -= r.x) < 0) x += mod;\n      return *this;\n   }\n   mint&\
     \ operator*=(mint r) {\n      x = 1LL * x * r.x % mod;\n      return *this;\n\
     \   }\n   mint& operator/=(mint r) { return *this *= r.inv(); }\n   friend mint\
@@ -29,9 +29,9 @@ data:
     \ a = *this, c = 1;\n      while(b) {\n         if(b & 1) c *= a;\n         a\
     \ *= a;\n         b >>= 1;\n      }\n      return c;\n   }\n};\nusing vm = vector<mint>;\n"
   code: "constexpr int mod = 998244353;\nstruct mint {\n   int x;\n   mint(ll x_ =\
-    \ 0) : x(x_ % mod) {\n      if(x < 0) x == mod;\n   }\n   mint operator-() {\n\
+    \ 0) : x(x_ % mod) {\n      if(x < 0) x += mod;\n   }\n   mint operator-() {\n\
     \      auto res = *this;\n      res.x = (x ? mod - x : 0);\n      return res;\n\
-    \   }\n   mint& operator+=(mint r) {\n      if((x += r.x) >= mod) x -= r.x;\n\
+    \   }\n   mint& operator+=(mint r) {\n      if((x += r.x) >= mod) x -= mod;\n\
     \      return *this;\n   }\n   mint& operator-=(mint r) {\n      if((x -= r.x)\
     \ < 0) x += mod;\n      return *this;\n   }\n   mint& operator*=(mint r) {\n \
     \     x = 1LL * x * r.x % mod;\n      return *this;\n   }\n   mint& operator/=(mint\
@@ -46,7 +46,7 @@ data:
   isVerificationFile: false
   path: src/modint/modint.hpp
   requiredBy: []
-  timestamp: '2024-09-13 21:17:34+09:00'
+  timestamp: '2024-11-29 00:14:32+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/modint/modint.test.cpp

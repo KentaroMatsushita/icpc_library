@@ -28,9 +28,9 @@ data:
     bool chmin(auto& a, auto b) { return a > b ? a = b, 1 : 0; }\nbool chmax(auto&\
     \ a, auto b) { return a < b ? a = b, 1 : 0; }\n#line 1 \"src/modint/modint.hpp\"\
     \nconstexpr int mod = 998244353;\nstruct mint {\n   int x;\n   mint(ll x_ = 0)\
-    \ : x(x_ % mod) {\n      if(x < 0) x == mod;\n   }\n   mint operator-() {\n  \
+    \ : x(x_ % mod) {\n      if(x < 0) x += mod;\n   }\n   mint operator-() {\n  \
     \    auto res = *this;\n      res.x = (x ? mod - x : 0);\n      return res;\n\
-    \   }\n   mint& operator+=(mint r) {\n      if((x += r.x) >= mod) x -= r.x;\n\
+    \   }\n   mint& operator+=(mint r) {\n      if((x += r.x) >= mod) x -= mod;\n\
     \      return *this;\n   }\n   mint& operator-=(mint r) {\n      if((x -= r.x)\
     \ < 0) x += mod;\n      return *this;\n   }\n   mint& operator*=(mint r) {\n \
     \     x = 1LL * x * r.x % mod;\n      return *this;\n   }\n   mint& operator/=(mint\
@@ -72,7 +72,7 @@ data:
   isVerificationFile: true
   path: test/FPS/FFT.test.cpp
   requiredBy: []
-  timestamp: '2024-09-13 21:17:34+09:00'
+  timestamp: '2024-11-29 00:14:32+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/FPS/FFT.test.cpp

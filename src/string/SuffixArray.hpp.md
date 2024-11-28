@@ -50,8 +50,8 @@ data:
   timestamp: '2024-09-13 21:17:34+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/string/LCP.test.cpp
   - test/string/SuffixArray.test.cpp
+  - test/string/LCP.test.cpp
 documentation_of: src/string/SuffixArray.hpp
 layout: document
 title: Suffix Array
