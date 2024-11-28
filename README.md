@@ -7,8 +7,7 @@ https://github.com/tatyam-prime/ICPC_notebook?tab=readme-ov-file
 - CSS 組版で、ファイルを置くだけで PDF が簡単に作れる、ICPC 用ライブラリのすごいテンプレート
 - かつ、みんなでつくる最強の ICPC 用ライブラリ (予定)
 - [ライブラリのドキュメント](https://tatyam-prime.github.io/ICPC_notebook/)
-- [ライブラリをまとめたページ](https://tatyam-prime.github.io/ICPC_notebook/notebook.html)
-- [ライブラリをまとめた PDF](https://tatyam-prime.github.io/ICPC_notebook/notebook.pdf)
+- [ライブラリをまとめた PDF](https://github.com/KentaroMatsushita/icpc_library/blob/main/notebook.pdf)
 
 ## private なコピーを作るには
 
