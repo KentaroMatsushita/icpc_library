@@ -2,7 +2,7 @@ constexpr int mod = 998244353;
 struct mint {
    int x;
    mint(ll x_ = 0) : x(x_ % mod) {
-      if(x < 0) x == mod;
+      if(x < 0) x += mod;
    }
    mint operator-() {
       auto res = *this;
@@ -10,7 +10,7 @@ struct mint {
       return res;
    }
    mint& operator+=(mint r) {
-      if((x += r.x) >= mod) x -= r.x;
+      if((x += r.x) >= mod) x -= mod;
       return *this;
    }
    mint& operator-=(mint r) {
