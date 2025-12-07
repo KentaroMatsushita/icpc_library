@@ -134,7 +134,7 @@ data:
     - icon: ':warning:'
       path: src/graph/maximum-independent-set.hpp
       title: src/graph/maximum-independent-set.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/graph/scc.hpp
       title: src/graph/scc.hpp
     - icon: ':warning:'
@@ -250,6 +250,11 @@ data:
     - icon: ':x:'
       path: test/data-structure/FastSet.test.cpp
       title: test/data-structure/FastSet.test.cpp
+  - name: test/graph
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: test/graph/scc.test.cpp
+      title: test/graph/scc.test.cpp
   - name: test/math
     pages:
     - icon: ':x:'

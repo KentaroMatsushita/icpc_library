@@ -6,6 +6,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/data-structure/BIT.test.2.cpp
     title: test/data-structure/BIT.test.2.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/graph/scc.test.cpp
+    title: test/graph/scc.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -46,6 +49,7 @@ data:
   timestamp: '2024-09-13 21:17:34+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/graph/scc.test.cpp
   - test/data-structure/BIT.test.2.cpp
 documentation_of: src/template/1template.hpp
 layout: document
