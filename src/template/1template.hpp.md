@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/data-structure/BIT.test.2.cpp
+    title: test/data-structure/BIT.test.2.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"src/template/1template.hpp\"\n\n#include <bits/stdc++.h>\n\
@@ -41,8 +44,9 @@ data:
   path: src/template/1template.hpp
   requiredBy: []
   timestamp: '2024-09-13 21:17:34+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/data-structure/BIT.test.2.cpp
 documentation_of: src/template/1template.hpp
 layout: document
 redirect_from:

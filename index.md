@@ -18,7 +18,7 @@ data:
       title: src/FPS/relaxed-convolution.hpp
   - name: src/data-structure
     pages:
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/data-structure/BIT.hpp
       title: BIT (Fenwick Tree)
     - icon: ':x:'
@@ -211,7 +211,7 @@ data:
       title: src/string/enumerate-runs.hpp
   - name: src/template
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/template/1template.hpp
       title: src/template/1template.hpp
     - icon: ':warning:'
@@ -241,6 +241,9 @@ data:
       title: test/FPS/FFT_fast.test.cpp
   - name: test/data-structure
     pages:
+    - icon: ':heavy_check_mark:'
+      path: test/data-structure/BIT.test.2.cpp
+      title: test/data-structure/BIT.test.2.cpp
     - icon: ':x:'
       path: test/data-structure/BIT.test.cpp
       title: test/data-structure/BIT.test.cpp

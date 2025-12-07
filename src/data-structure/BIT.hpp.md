@@ -3,12 +3,15 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/data-structure/BIT.test.2.cpp
+    title: test/data-structure/BIT.test.2.cpp
   - icon: ':x:'
     path: test/data-structure/BIT.test.cpp
     title: test/data-structure/BIT.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"src/data-structure/BIT.hpp\"\nstruct BIT {\n   vl a;\n \
@@ -16,26 +19,27 @@ data:
     \ < si(a)) a[i] += x, i += i & -i;\n   }\n   ll sum(ll r) {\n      ll s = 0;\n\
     \      while(r) s += a[r], r -= r & -r;\n      return s;\n   }\n   ll sum(ll l,\
     \ ll r) { return sum(r) - sum(l); }\n   // minimize i s.t. sum(i) >= w\n   int\
-    \ lower_bound(ll w) {\n      if(w <= 0) return 0;\n      int x = 0, N = si(a)\
-    \ + 1;\n      for(int k = 1 << __lg(N); k; k >>= 1) {\n         if(x + k <= N\
-    \ - 1 && a[x + k] < w) {\n            w -= a[x + k];\n            x += k;\n  \
-    \       }\n      }\n      return x;\n   }\n};\n"
+    \ lower_bound(ll w) {\n      int x = 0, N = si(a) - 1; \n      for(int k = 1 <<\
+    \ __lg(N); k; k >>= 1) {\n         if(x + k <= N && a[x + k] < w) {\n        \
+    \    w -= a[x + k];\n            x += k;\n         }\n      }\n      return x\
+    \ + 1;\n   }\n};\n"
   code: "struct BIT {\n   vl a;\n   BIT(ll n) : a(n + 1) {}\n   void add(ll i, ll\
     \ x) {\n      i++;\n      while(i < si(a)) a[i] += x, i += i & -i;\n   }\n   ll\
     \ sum(ll r) {\n      ll s = 0;\n      while(r) s += a[r], r -= r & -r;\n     \
     \ return s;\n   }\n   ll sum(ll l, ll r) { return sum(r) - sum(l); }\n   // minimize\
-    \ i s.t. sum(i) >= w\n   int lower_bound(ll w) {\n      if(w <= 0) return 0;\n\
-    \      int x = 0, N = si(a) + 1;\n      for(int k = 1 << __lg(N); k; k >>= 1)\
-    \ {\n         if(x + k <= N - 1 && a[x + k] < w) {\n            w -= a[x + k];\n\
-    \            x += k;\n         }\n      }\n      return x;\n   }\n};"
+    \ i s.t. sum(i) >= w\n   int lower_bound(ll w) {\n      int x = 0, N = si(a) -\
+    \ 1; \n      for(int k = 1 << __lg(N); k; k >>= 1) {\n         if(x + k <= N &&\
+    \ a[x + k] < w) {\n            w -= a[x + k];\n            x += k;\n         }\n\
+    \      }\n      return x + 1;\n   }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/data-structure/BIT.hpp
   requiredBy: []
-  timestamp: '2024-09-13 21:17:34+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2025-12-07 21:05:39+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/data-structure/BIT.test.cpp
+  - test/data-structure/BIT.test.2.cpp
 documentation_of: src/data-structure/BIT.hpp
 layout: document
 title: BIT (Fenwick Tree)

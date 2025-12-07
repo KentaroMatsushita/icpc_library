@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/data-structure/BIT.hpp
     title: BIT (Fenwick Tree)
   - icon: ':question:'
@@ -27,15 +27,15 @@ data:
     \ {\n      i++;\n      while(i < si(a)) a[i] += x, i += i & -i;\n   }\n   ll sum(ll\
     \ r) {\n      ll s = 0;\n      while(r) s += a[r], r -= r & -r;\n      return\
     \ s;\n   }\n   ll sum(ll l, ll r) { return sum(r) - sum(l); }\n   // minimize\
-    \ i s.t. sum(i) >= w\n   int lower_bound(ll w) {\n      if(w <= 0) return 0;\n\
-    \      int x = 0, N = si(a) + 1;\n      for(int k = 1 << __lg(N); k; k >>= 1)\
-    \ {\n         if(x + k <= N - 1 && a[x + k] < w) {\n            w -= a[x + k];\n\
-    \            x += k;\n         }\n      }\n      return x;\n   }\n};\n#line 4\
-    \ \"test/data-structure/BIT.test.cpp\"\n\nint main() {\n   cin.tie(0)->sync_with_stdio(0);\n\
-    \n   ll N, Q;\n   cin >> N >> Q;\n\n   BIT A(N);\n   rep(i, 0, N) {\n      ll\
-    \ a;\n      cin >> a;\n      A.add(i, a);\n   }\n\n   while(Q--) {\n      ll a,\
-    \ b, c;\n      cin >> a >> b >> c;\n      if(a == 0) A.add(b, c);\n      else\
-    \ cout << A.sum(b, c) << '\\n';\n   }\n}\n"
+    \ i s.t. sum(i) >= w\n   int lower_bound(ll w) {\n      int x = 0, N = si(a) -\
+    \ 1; \n      for(int k = 1 << __lg(N); k; k >>= 1) {\n         if(x + k <= N &&\
+    \ a[x + k] < w) {\n            w -= a[x + k];\n            x += k;\n         }\n\
+    \      }\n      return x + 1;\n   }\n};\n#line 4 \"test/data-structure/BIT.test.cpp\"\
+    \n\nint main() {\n   cin.tie(0)->sync_with_stdio(0);\n\n   ll N, Q;\n   cin >>\
+    \ N >> Q;\n\n   BIT A(N);\n   rep(i, 0, N) {\n      ll a;\n      cin >> a;\n \
+    \     A.add(i, a);\n   }\n\n   while(Q--) {\n      ll a, b, c;\n      cin >> a\
+    \ >> b >> c;\n      if(a == 0) A.add(b, c);\n      else cout << A.sum(b, c) <<\
+    \ '\\n';\n   }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_range_sum\"\n\
     #include \"test/template.hpp\"\n#include \"src/data-structure/BIT.hpp\"\n\nint\
     \ main() {\n   cin.tie(0)->sync_with_stdio(0);\n\n   ll N, Q;\n   cin >> N >>\
@@ -49,7 +49,7 @@ data:
   isVerificationFile: true
   path: test/data-structure/BIT.test.cpp
   requiredBy: []
-  timestamp: '2024-09-13 21:17:34+09:00'
+  timestamp: '2025-12-07 21:05:39+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/data-structure/BIT.test.cpp
