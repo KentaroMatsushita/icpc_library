@@ -1,5 +1,6 @@
 {
 "test/data-structure/BIT.test.2.cpp": "2025-12-07 21:05:39 +0900",
+"test/graph/scc.test.cpp": "2025-12-07 21:30:07 +0900",
 "test/math/ExtGCD.test.cpp": "2024-09-04 19:36:22 +0900",
 "test/string/KMP.test.cpp": "2024-09-04 19:36:22 +0900",
 "test/string/Manacher.test.cpp": "2024-09-04 19:36:22 +0900",
