@@ -4,7 +4,7 @@ template<typename G> struct SCC {
    vi comp, ord, used;
    int num;  // 連結成分の数
 
-   SCC(G g) : g(g), rg(si(g)), comp(si(g), -1), ord(si(g)), used(si(g)) {
+   SCC(G g) : g(g), rg(si(g)), comp(si(g), -1), used(si(g)) {
       rep(i, si(g)) fore(e, g[i]) rg[e].eb(i);
       build();
    };
